@@ -10,7 +10,8 @@ class ImageButton extends Component {
   static defaultProps = {}
 
   state = {
-    isOnfocus: false
+    isOnfocus: false,
+
   }
 
   centerImage = (e) => {
@@ -26,7 +27,14 @@ class ImageButton extends Component {
 
     img.style.left = `${- (width - pWidth)/2}px`;
     img.style.top = `${- (height - pHeight)/2}px`;
+
+    return;
   }
+
+  fouceChange = () => this.setState({
+    isOnfocus: !this.state.isOnfocus,
+  });
+
 
   render () {
 
@@ -34,12 +42,21 @@ class ImageButton extends Component {
       width: '90px',
       height: '90px',
       borderRadius: '100vw',
+      transition: 'all 0.5s ease-in-out',
     }
 
+    const {
+      isOnfocus
+    } = this.state;
 
     return (
-      <div style={roundStyle} className="ib">
-        <img src={this.props.imgSrc} onLoad={this.centerImage}/>
+      <div
+        style={roundStyle}
+        className={`ib ${isOnfocus ? 'deep-3' : 'deep-2'}`}
+        onMouseEnter={this.fouceChange}
+        onMouseLeave={this.fouceChange}
+        >
+        <img src={this.props.imgSrc} onLoad={this.centerImage} alt=""/>
       </div>
     )
   }

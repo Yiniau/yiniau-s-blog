@@ -12,9 +12,6 @@ import {
 
 class App extends Component {
   render() {
-    const navbuttonStyle = {
-      
-    }
 
     return (
       <div>

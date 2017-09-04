@@ -6,6 +6,13 @@ import {
   NavButton,
 } from '../../components'
 
+// 侧边栏
+import SideBar from './SideBar';
+// 主内容区
+import MainContent from './MainContent';
+// 文章分区类别
+import TabContent from './TabContent';
+
 import './Blog.css'
 
 class Blog extends Component {
@@ -14,78 +21,10 @@ class Blog extends Component {
 
   state = {}
 
+  // componentDidMount() {
+  //   fetch()
+  // }
   render () {
-    // 侧边栏
-    const SideBar = (props) => {
-      const style = {
-        width: '15vw',
-        minHeight: '100vh',
-        backgroundColor: 'rgb(255, 255, 255)',
-
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        position: 'relative',
-
-        ...props.style,
-      }
-
-      return (
-        <div style={style}>
-          {props.children}
-        </div>
-      )
-    }
-    // 主内容区
-    const MainContent = (props) => {
-      const style = {
-        width: '100%',
-        minHeight: '100vh',
-        padding: '5px',
-
-        backgroundColor: 'rgb(208, 208, 208)',
-
-        ...props.style,
-      }
-      return (
-        <div style={style}>
-          {props.children}
-        </div>
-      )
-    }
-    // 文章分区类别
-    const TabContent = (props) => {
-      const tabStyle = {
-        width: '14.4vw',
-        backgroundColor: 'rgb(210, 210, 210)',
-
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-
-        position: 'fixed',
-        bottom: '0',
-
-        ...props.boxStyle,
-      }
-      return (
-        <div style={tabStyle}>
-          {props.children}
-          <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              borderTop: '1px solid rgb(91, 91, 91)',
-              width: '80%',
-              height: '6vh'}}>
-            <button className="fa fa-weixin fa-lg iconButton"></button>
-            <button className="fa fa-qq fa-lg iconButton"></button>
-            <button className="fa fa-envelope fa-lg iconButton"></button>
-          </div>
-        </div>
-      )
-    }
 
     const navBaseConfig = {
       to: "/blog/javascript",

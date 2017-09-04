@@ -7,3 +7,13 @@ body {
 * {
   text-decoration: none
 }
+
+.deep-1 {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+.deep-2 {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px 0px, rgba(0, 0, 0, 0.23) 0px 3px 10px 0px;
+}
+.deep-3 {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 8px 10px 10px, rgba(0, 0, 0, 0.29) 0px 5px 6px 5px;
+}
