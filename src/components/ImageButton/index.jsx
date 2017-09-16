@@ -7,13 +7,26 @@ class ImageButton extends Component {
   static propTypes = {
     style: PropTypes.object,
   }
-  static defaultProps = {}
+
+  static defaultProps = {
+    style: {
+      width: '90px',
+      height: '90px',
+      borderRadius: '100vw',
+      transition: 'all 0.5s ease-in-out',
+    }
+  }
 
   state = {
     isOnfocus: false,
-
   }
 
+  /**
+   * 将图片中心移动到元素的中心
+   * @method centerImage
+   * @param  {eventObject}    e  event 事件对象
+   * @return {object}  null
+   */
   centerImage = (e) => {
     e.persist(); // 异步事件
 
@@ -31,31 +44,27 @@ class ImageButton extends Component {
     return;
   }
 
+  /**
+   * 判断是否获得焦点
+   * @method fouceChange
+   * @return {Object}   undefiend
+   */
   fouceChange = () => this.setState({
     isOnfocus: !this.state.isOnfocus,
   });
 
-
   render () {
-
-    const roundStyle = {
-      width: '90px',
-      height: '90px',
-      borderRadius: '100vw',
-      transition: 'all 0.5s ease-in-out',
-    }
-
     const {
       isOnfocus
     } = this.state;
 
     return (
       <div
-        style={roundStyle}
+        style={this.props.style}
         className={`ib ${isOnfocus ? 'deep-3' : 'deep-2'}`}
         onMouseEnter={this.fouceChange}
         onMouseLeave={this.fouceChange}
-        >
+      >
         <img src={this.props.imgSrc} onLoad={this.centerImage} alt=""/>
       </div>
     )

@@ -1,5 +1,4 @@
 const fs = require('fs');
-// const mongoose = require('mongoose');
 const paths = require('../../config/paths.js');
 
 /**
@@ -148,5 +147,3 @@ module.exports = {
   saveAsHTML,
   obj2KeyValue,
 };
-
-

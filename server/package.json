@@ -41,6 +41,7 @@
     "koa-router": "^7.2.1",
     "koa-send": "^4.1.0",
     "koa-static": "^4.0.1",
+    "koa2-cors": "^2.0.3",
     "marked": "^0.3.6",
     "media-typer": "^0.3.0",
     "methods": "^1.1.2",

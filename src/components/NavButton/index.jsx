@@ -10,18 +10,24 @@ class NavButton extends Component {
   static propTypes = {
     to: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    iconStyle: PropTypes.object.isRequired,
+    icon: PropTypes.string,
+    boxStyle: PropTypes.object,
     textStyle: PropTypes.object,
-  }
+    isActive: PropTypes.bool,
+  };
   static defaultProps = {
-    icon: 'fa fa-hand-o-right',
+    boxStyle: {},
     textStyle: {},
-  }
+    isActive: false,
+  };
 
-  state = {}
+  state = {
+  };
 
   render () {
     const {
+      id,
       to,
       boxClassName,
       boxStyle,
@@ -29,12 +35,48 @@ class NavButton extends Component {
       iconStyle,
       icon,
       content,
-      ...rest
+      isActive,
     } = this.props;
+    const hasIcon = icon && typeof icon === 'string';
     return (
-      <Link to={to} className={`nb ${boxClassName || ''}`} {...rest}>
-        <i className={icon} aria-hidden="true" style={iconStyle}></i>
-        <h6 style={textStyle}>
+      <Link
+        id={id}
+        to={to}
+        className={`nb ${boxClassName || ''}`}
+        style={
+          hasIcon
+          ? boxStyle
+          : {...boxStyle, justifyContent: 'center'}}
+        onClick={this.clickHander}>
+
+        {/* 根据是否有icon属性决定是否要生成i标签 */}
+        {(() => {
+            if (hasIcon) {
+              return (
+                <i
+                  className={icon}
+                  aria-hidden={"true"}
+                  style={
+                    isActive
+                    ? {...iconStyle, transform: 'rotate(90deg)'}
+                    : iconStyle
+                  }>
+                </i>
+              )
+            }
+          })()}
+        <h6
+          style={
+            hasIcon
+            ? {
+                fontFamily: 'Ubuntu Condensed, sans-serif',
+                ...textStyle,
+                marginLeft: '0',
+              } : {
+                fontFamily: 'Ubuntu Condensed, sans-serif',
+                ...textStyle,
+              }
+          }>
           {content}
         </h6>
       </Link>

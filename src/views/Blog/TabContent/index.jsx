@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TabContent = (props) => {
-  const tabStyle = {
+  const style = {
     width: '14.4vw',
     backgroundColor: 'rgb(210, 210, 210)',
 
@@ -15,7 +15,7 @@ const TabContent = (props) => {
     ...props.boxStyle,
   }
   return (
-    <div style={tabStyle} className="deep-2">
+    <div style={style} className="deep-2">
       {props.children}
       <div style={{
           display: 'flex',

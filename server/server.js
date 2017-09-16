@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const compose = require('koa-compose');
 const logger = require('koa-logger');
+const cors = require('koa2-cors');
 const bodyParser = require('koa-bodyparser');
 
 // controllers路径
@@ -20,12 +21,14 @@ const app = new Koa();
 const SERVER_PORT = 3090;
 
 
-
 //========= Pretreatment =============================
 app.use(compose([
+  cors(require(`${appServerConfig}/corsConfig.js`)),
   logger(),
   bodyParser(require(`${appServerConfig}/bodyParserConfig.js`)),
 ]));
+//====================================================
+
 /***///===============================================
 /***/  console.log('\r');
 /***/  console.log('pretreatment finished');

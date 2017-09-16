@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Switch,
   Redirect,
 } from 'react-router-dom';
 
@@ -12,7 +10,6 @@ import {
 
 class App extends Component {
   render() {
-
     return (
       <div>
         <Redirect from='/' to='/blog'/>
