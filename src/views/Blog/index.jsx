@@ -15,7 +15,11 @@ import TabContent from './TabContent';
 // 文章标题导航容器
 import ALC from './ArticleListContainer';
 
-import './Blog.css'
+import './Blog.css';
+
+//////=============static variable================
+/****/const navListUrl = 'http://localhost:3090/api/getNavList';
+//////============================================
 
 class Blog extends Component {
   static defaultProps = {
@@ -33,7 +37,7 @@ class Blog extends Component {
   }
 
   componentWillMount() {
-    fetch('http://localhost:3090/api/getNavList', {
+    fetch(navListUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,8 +55,8 @@ class Blog extends Component {
           throw error;
         }
       })
-      .then(res => res.json())
-      .then(data => {
+      .then(res => res.json()) // 将获取的json数据转化成js对象
+      .then(data => { // 将data放入state中
         this.setState((prevState, props) => {
           const { navBaseConfig } = props;
           // console.log(data)
@@ -68,19 +72,18 @@ class Blog extends Component {
         });
         return data;
       })
-      .then(data => {
-        console.log(`fetch navList data: ${this.state.navTabConfigList}`);
-      })
       .catch(e => console.error(e));
   }
 
   // componentDidMount() {}
 
   titleListEventHandler = (e) => {
+    const selectArticle = this.state.selectArticle;
+    const targetId = e.currentTarget.id;
+
     this.setState({
-      selectArticle: e.currentTarget.id,
+      selectArticle: selectArticle === targetId ? '' : targetId
     });
-    // console.log(e.currentTarget);
   }
 
   render () {
@@ -91,9 +94,13 @@ class Blog extends Component {
       selectArticle,
     } = this.state;
 
+    const {
+      navBaseConfig
+    } = this.props;
+
     const tagNbConfigList = [
       {
-        ...this.props.navBaseConfig,
+        ...navBaseConfig,
         content: 'tags',
         icon: 'fa fa-tags fa-lg',
         style: {
@@ -132,9 +139,11 @@ class Blog extends Component {
                   boxStyle={
                     selectArticle === conf.content
                     ? {
+                      opacity: '1',
                       padding: '0 20px',
-                      height: `${articleTitleList[conf.content].length * 6}vh`,
+                      height: `${articleTitleList[conf.content].length * 5}vh`,
                     } : {
+                      opacity: '0',
                       padding: '0 20px',
                       height: 0,
                     }

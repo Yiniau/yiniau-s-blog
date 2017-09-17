@@ -37,16 +37,37 @@ class NavButton extends Component {
       content,
       isActive,
     } = this.props;
+
+    const getLinkBtnSytle = (hasi, isa) => {
+      return (
+        hasi
+        ? isa
+          ? {
+            ...boxStyle,
+            background: 'rgba(200, 238, 255, 0.50)',
+            boxShadow: '0 1px 6px rgb(0, 178, 255), 0 1px 4px rgb(0, 178, 255)',
+          } : boxStyle
+        : isa
+          ? {
+            ...boxStyle,
+            justifyContent: 'center',
+            background: 'rgba(200, 238, 255, 0.50)',
+            boxShadow: '0 1px 6px rgb(0, 178, 255), 0 1px 4px rgb(0, 178, 255)',
+          } : {
+            ...boxStyle,
+            justifyContent: 'center',
+          }
+      )
+    };
+
     const hasIcon = icon && typeof icon === 'string';
+
     return (
       <Link
         id={id}
         to={to}
         className={`nb ${boxClassName || ''}`}
-        style={
-          hasIcon
-          ? boxStyle
-          : {...boxStyle, justifyContent: 'center'}}
+        style={getLinkBtnSytle(hasIcon, isActive)}
         onClick={this.clickHander}>
 
         {/* 根据是否有icon属性决定是否要生成i标签 */}
@@ -58,8 +79,10 @@ class NavButton extends Component {
                   aria-hidden={"true"}
                   style={
                     isActive
-                    ? {...iconStyle, transform: 'rotate(90deg)'}
-                    : iconStyle
+                    ? {
+                      ...iconStyle,
+                      transform: 'rotate(90deg)',
+                    } : iconStyle
                   }>
                 </i>
               )

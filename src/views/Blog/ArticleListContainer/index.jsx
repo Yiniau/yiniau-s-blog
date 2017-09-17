@@ -13,11 +13,7 @@ const ArticleListContainer = (props) => {
       id={id}
       onClick={onClick}
       className='alc'
-      style={
-        props.isHidden
-        ? {opacity: 0, ...boxStyle}
-        : {opacity: 1, ...boxStyle}
-      }>
+      style={boxStyle}>
       {children}
     </div>
   )
