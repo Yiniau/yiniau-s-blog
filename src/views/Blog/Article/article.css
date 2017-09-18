@@ -47,8 +47,8 @@
 }
 
 
-.article code, pre {
-  color: #525252;
+.article code,.article pre {
+  color: #ed6712;
   font-size: 0.8em;
   background-color: #f8f8f8;
   font-family: 'Roboto Mono', Monaco, courier, monospace;
@@ -67,6 +67,7 @@
   margin: 3px;
 }
 .article pre > code {
+  color: #525252;
   display: block;
 }
 
