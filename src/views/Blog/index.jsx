@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
+import {Route} from 'react-router-dom';
 
 import {
   Logo,
@@ -14,6 +15,8 @@ import MainContent from './MainContent';
 import TabContent from './TabContent';
 // 文章标题导航容器
 import ALC from './ArticleListContainer';
+// the article self
+import Article from './Article';
 
 import './Blog.css';
 
@@ -36,7 +39,9 @@ class Blog extends Component {
     navTabConfigList: [],
   }
 
+  // TODO: replace componentWillMount to componentDidMount
   componentWillMount() {
+    console.log('<Blog> will mount');
     fetch(navListUrl, {
       method: 'GET',
       headers: {
@@ -95,9 +100,10 @@ class Blog extends Component {
     } = this.state;
 
     const {
-      navBaseConfig
+      navBaseConfig,
     } = this.props;
 
+    // 卡片导航区配置(static)
     const tagNbConfigList = [
       {
         ...navBaseConfig,
@@ -113,7 +119,7 @@ class Blog extends Component {
 
     return (
       <div className="Blog">
-        <SideBar>
+        <SideBar className="deep-1">
           <Logo imgSrc={require('./avatar@0,5x.jpg')}/>
 
           <ALC>
@@ -179,6 +185,7 @@ class Blog extends Component {
 
         </SideBar>
         <MainContent>
+          <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>
     )
@@ -186,3 +193,6 @@ class Blog extends Component {
 }
 
 export default Blog;
+
+// <Article folder={folder} title={title}/>
+// <Route path='/:folder/:title' component={Article}/>

@@ -1,0 +1,23 @@
+.article .lang-javascript {
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-size: 1em;
+  color: #525252;
+}
+
+.article .lang-javascript > .hljs-keyword,
+.article .lang-javascript > * > .hljs-keyword {
+  color: #e92a00;
+}
+.article .lang-javascript > .hljs-built_in {
+  color: #22ac7f;
+}
+.article .lang-javascript > .hljs-string {
+  color: #598371;
+}
+.article .lang-javascript > .hljs-number {
+  color: #af57c6;
+}
+.article .lang-javascript > .hljs-function > .hljs-params,
+.article .lang-javascript > .hljs-string > .hljs-subst {
+  color: #b7830d;
+}

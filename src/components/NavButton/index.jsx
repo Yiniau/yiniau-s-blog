@@ -44,15 +44,15 @@ class NavButton extends Component {
         ? isa
           ? {
             ...boxStyle,
-            background: 'rgba(200, 238, 255, 0.50)',
-            boxShadow: '0 1px 6px rgb(0, 178, 255), 0 1px 4px rgb(0, 178, 255)',
+            backgroundColor: 'rgba(62, 195, 255, 0.5)',
+            boxShadow: '0 1px 6px #00b2ff, 0 1px 4px #00b2ff',
           } : boxStyle
         : isa
           ? {
             ...boxStyle,
             justifyContent: 'center',
-            background: 'rgba(200, 238, 255, 0.50)',
-            boxShadow: '0 1px 6px rgb(0, 178, 255), 0 1px 4px rgb(0, 178, 255)',
+            backgroundColor: 'rgba(62, 195, 255, 0.5)',
+            boxShadow: '0 1px 6px #00b2ff, 0 1px 4px #00b2ff',
           } : {
             ...boxStyle,
             justifyContent: 'center',
@@ -61,14 +61,13 @@ class NavButton extends Component {
     };
 
     const hasIcon = icon && typeof icon === 'string';
-
+    // TODO: replace <Link></Link> to <NavLink><NavLink/>
     return (
       <Link
         id={id}
         to={to}
         className={`nb ${boxClassName || ''}`}
-        style={getLinkBtnSytle(hasIcon, isActive)}
-        onClick={this.clickHander}>
+        style={getLinkBtnSytle(hasIcon, isActive)}>
 
         {/* 根据是否有icon属性决定是否要生成i标签 */}
         {(() => {

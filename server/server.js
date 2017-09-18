@@ -25,7 +25,7 @@ const SERVER_PORT = 3090;
 app.use(compose([
   cors(require(`${appServerConfig}/corsConfig.js`)),
   logger(),
-  bodyParser(require(`${appServerConfig}/bodyParserConfig.js`)),
+  // bodyParser(require(`${appServerConfig}/bodyParserConfig.js`)),R
 ]));
 //====================================================
 

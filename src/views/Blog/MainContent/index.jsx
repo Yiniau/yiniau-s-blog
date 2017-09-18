@@ -2,11 +2,10 @@ import React from 'react';
 
 const MainContent = (props) => {
   const style = {
-    width: '100%',
+    width: '85vw',
     minHeight: '100vh',
-    padding: '5px',
 
-    backgroundColor: 'rgb(208, 208, 208)',
+    boxSize: 'border-box',
 
     ...props.style,
   }

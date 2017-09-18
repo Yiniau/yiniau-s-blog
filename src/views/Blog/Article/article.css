@@ -1,0 +1,90 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  box-sizing: border-box;
+  border-radius: 5px;
+
+  width: 85vw;
+  height: 100vh;
+  padding: 10px 15vw;
+  line-height: 1.5;
+
+  overflow: scroll;
+
+  background-color: #ffffff;
+  color: #34495e;
+}
+.article * {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.article img {
+  display: block;
+  max-width: 100%;
+  margin: 0.5vh auto;
+}
+
+.article p {
+  width: 100%;
+}
+
+.article blockquote > p {
+  margin: 7px 0;
+}
+
+.article blockquote {
+  border-left: 4px solid #7322ac;
+  padding: 0 1.5vw;
+}
+
+.article a {
+  color: #7322ac;
+  word-break: break-all;
+}
+
+
+.article code, pre {
+  color: #525252;
+  font-size: 0.8em;
+  background-color: #f8f8f8;
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+}
+.article pre {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+.article code {
+  border-radius: 3px;
+  white-space: inherit;
+  max-height: 60vh;
+  overflow: auto;
+  margin: 3px;
+}
+.article pre > code {
+  display: block;
+}
+
+::selection {
+  color: #FFFFFF;
+  background-color: #7322ac;
+}
+
+.article h2:before,
+.article h3:before,
+.article h4:before,
+.article h5:before,
+.article h6:before {
+  content: "#";
+  color: #7322ac;
+  position: absolute;
+  left: -0.7em;
+  top: -0.09em;
+  font-size: 1.2em;
+  font-weight: 700;
+}

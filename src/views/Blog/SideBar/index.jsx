@@ -16,7 +16,7 @@ const SideBar = (props) => {
   }
 
   return (
-    <div style={style}>
+    <div style={style} className={props.className}>
       {props.children}
     </div>
   )

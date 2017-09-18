@@ -125,6 +125,7 @@ async function saveData(data, col) {
  */
 async function getArticleByTitle(title, MC) {
   try {
+    console.log(title);
     const {db, col} = await getCollection('articles', MC);
     const docs = await col.find({title}).toArray();
     // console.log(docs);
@@ -188,6 +189,9 @@ async function getTitlesByCategory(cate, MC) {
 }
 
 // getTitlesByCategory('docker', MongoClient).then(data => console.log(data));
+
+// getArticleByTitle('E10S-Multi-WebExtension-APIs-CSS-clip-path-md', MongoClient)
+//   .then(data => console.log(data));
 
 module.exports = {
   MongoClient,
