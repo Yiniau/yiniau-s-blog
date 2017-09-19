@@ -41,7 +41,6 @@ class Blog extends Component {
 
   // TODO: replace componentWillMount to componentDidMount
   componentWillMount() {
-    console.log('<Blog> will mount');
     fetch(navListUrl, {
       method: 'GET',
       headers: {
@@ -49,7 +48,7 @@ class Blog extends Component {
         'Accept': 'application/json',
       },
       mode: 'cors',
-      cache: 'defult',
+      // cache: 'defult',
     })
       .then(res => {  // 失败处理
         if (res.ok) {

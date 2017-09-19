@@ -1,0 +1,28 @@
+.article .lang-javascript {
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-size: 1em;
+  color: #525252;
+}
+
+.article .lang-javascript .hljs-keyword {
+  color: #e92a00;
+}
+.article .lang-javascript .hljs-built_in {
+  color: #22ac7f;
+}
+.article .lang-javascript .hljs-title {
+  color: #226aac;
+}
+.article .lang-javascript .hljs-string {
+  color: #598371;
+}
+.article .lang-javascript .hljs-number {
+  color: #af57c6;
+}
+.article .lang-javascript .hljs-comment {
+  color: rgba(85, 102, 98, 0.6);
+}
+.article .lang-javascript .hljs-params,
+.article .lang-javascript .hljs-subst {
+  color: #b7830d;
+}

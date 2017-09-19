@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 // TODO: [javascript, ] highlight
 import './article.css';
-import './javascript.css';
+import './mdStyle.css';
+import './css.css';
+import './html.css';
 
 class Article extends Component {
 
@@ -26,7 +28,7 @@ class Article extends Component {
         'Accept': 'application/json',
       },
       mode: 'cors',
-      cache: 'defult',
+      // cache: 'defult',
     })
       .then(res => {  // 失败处理
         if (res.ok) {
@@ -47,18 +49,20 @@ class Article extends Component {
   }
 
   render () {
-    let content = '';
-    let editTime;
+    let content = '<h1>loading</h1>';
+    let editTime = `<h3>${new Date().toLocaleDateString()}</h3>`;
     if (this.state.article) {
       const article = this.state.article[0];
       content = article.content;
       editTime = article.editTime;
     }
+
+    let html = `${content} \r\n \`${editTime}\`` || '<h3>loading</h3>'
     return (
       <article
         className="article deep-1"
         dangerouslySetInnerHTML={{
-          __html: `${content} \r\n \`${editTime}\``
+          __html: html,
         }}/>
     )
   }

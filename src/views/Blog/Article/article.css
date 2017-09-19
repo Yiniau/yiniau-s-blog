@@ -69,6 +69,7 @@
 .article pre > code {
   color: #525252;
   display: block;
+  font-size: 1em;
 }
 
 ::selection {

@@ -1,0 +1,22 @@
+.article .lang-css {
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+  font-size: 1em;
+  color: #525252;
+}
+
+.article .lang-css > .hljs-selector-class,
+.article .lang-css > .hljs-selector-tag {
+  color: #f09b00;
+}
+.article .lang-css > .hljs-attribute {
+  color: #af57c6;
+}
+.article .lang-css > .hljs-number {
+  color: #22ac7f;
+}
+.article .lang-css > .hljs-keyword {
+  color: #e92a00;
+}
+.article .lang-css > .hljs-built_in {
+  color: #009ce9;
+}
