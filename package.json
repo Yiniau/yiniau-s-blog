@@ -46,7 +46,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "server": "node ./server/server.js",
+    "pro-server": "export NODE_ENV=production && PORT=8090 node ./server/server.js",
+    "dev-server": "export NODE_ENV=development && node ./server/server.js",
     "docker-compose-up": "docker-compose up -d"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@ import Article from './Article';
 import './Blog.css';
 
 //////=============static variable================
-/****/const navListUrl = 'http://localhost:3090/api/getNavList';
+/****/const navListUrl = 'http://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {

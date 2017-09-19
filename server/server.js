@@ -1,8 +1,11 @@
+const fs = require('fs');
 const Koa = require('koa');
 const compose = require('koa-compose');
 const logger = require('koa-logger');
 const cors = require('koa2-cors');
-const bodyParser = require('koa-bodyparser');
+const morgan = require('koa-morgan');
+const paths = require('../config/paths');
+// const bodyParser = require('koa-bodyparser');
 
 // controllers路径
 const {
@@ -18,22 +21,35 @@ const {
 const app = new Koa();
 
 // define constants
-const SERVER_PORT = 3090;
-
+const SERVER_PORT = process.env.PORT || 8090;
 
 //========= Pretreatment =============================
-app.use(compose([
-  cors(require(`${appServerConfig}/corsConfig.js`)),
-  logger(),
-  // bodyParser(require(`${appServerConfig}/bodyParserConfig.js`)),R
-]));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(compose([
+    cors(require(`${appServerConfig}/corsConfig.js`)),
+    logger(),
+  ]));
+  /***///===============================================
+  /***/  console.log('\r');
+  /***/  console.log('pretreatment finished');
+  /***/  console.log('\r');
+  /***///===============================================
+} else {
+  app.use(compose([
+    cors(require(`${appServerConfig}/corsConfig.js`)),
+    require('koa-static')(paths.appBuild, require('./config/staticServerConfig')),
+    morgan(
+      ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms',
+      { stream: fs.createWriteStream('/log/access.log', { flags: 'a' }) }
+    ),
+  ]));
+  app.use(async (ctx, next) =>{
+    ctx.type = 'html';
+    ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
+  })
+}
 //====================================================
 
-/***///===============================================
-/***/  console.log('\r');
-/***/  console.log('pretreatment finished');
-/***/  console.log('\r');
-/***///===============================================
 
 //========= routers about ============================
 app.use(methodMapping(
