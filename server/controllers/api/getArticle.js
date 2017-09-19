@@ -11,11 +11,15 @@ module.exports = {
     const titleUTF8 = ctx.request.header.referer.split('/').pop();
     const title = decodeURI(titleUTF8);
     // console.log(`the article's title : ${title}`);
-    const docs = await getArticleByTitle(title, MongoClient);
+    let docs = await getArticleByTitle(title, MongoClient);
     // console.log(docs);
 
     // markdown parse
-    docs[0].content = await marked(docs[0].content);
+    if (docs[0].content) {
+      docs[0].content = await marked(docs[0].content);
+    } else {
+      docs = '<h3>There seems to be a mistake</h3>';
+    }
     // console.log(docs);
     ctx.response.body = docs;
   }
