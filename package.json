@@ -46,9 +46,9 @@
     "test": "node scripts/test.js --env=jsdom",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "pro-server": "export NODE_ENV=production && PORT=8090 node ./server/server.js",
-    "dev-server": "export NODE_ENV=development && node ./server/server.js",
-    "docker-compose-up": "docker-compose up -d"
+    "dev-server": "export NODE_ENV=development && PORT=9999 node ./server/server.js",
+    "docker-compose-up": "export NODE_ENV=development && PORT=9999 node /app/server/server.js",
+    "docker-compose-deploy": "node /app/server/server.js"
   },
   "devDependencies": {
     "@storybook/react": "^3.1.9",

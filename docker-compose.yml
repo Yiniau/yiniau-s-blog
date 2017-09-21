@@ -1,14 +1,25 @@
 version: '3'
 
 services:
+  node:
+    build: ./docker/node
+    container_name: "node"
+    environment:
+      - NODE_ENV:production
+    volumes:
+      - ~/yiniau-s-blog:/app
+    ports:
+      - 8090:8090
+    command: npm run docker-compose-deploy
   mongodb:
-    image: mongo:3.5
+    image: mongo:3.0.15
     container_name: "mongodb"
     environment:
       - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
+      - MONGO_LOG_DIR=/dev/log
     volumes:
       - ~/db/mongo-data:/data/db
+      - ~/db/mongo-log:/log/mongo-log
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --smallfiles --dbpath=/data/db --logpath=/log/mongo-log --logappend

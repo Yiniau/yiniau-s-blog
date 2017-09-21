@@ -21,7 +21,8 @@ import Article from './Article';
 import './Blog.css';
 
 //////=============static variable================
-/****/const navListUrl = 'http://yiniau.com/api/getNavList';
+/****/const navListUrl = 'http://localhost:9999/api/getNavList';
+// /****/const navListUrl = 'http://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
@@ -32,12 +33,12 @@ class Blog extends Component {
       content: "error",
       iconStyle: { marginLeft: '2vw' },
     }
-  }
+  };
 
   state = {
     articleTitleList: {},
     navTabConfigList: [],
-  }
+  };
 
   // TODO: replace componentWillMount to componentDidMount
   componentWillMount() {
@@ -88,7 +89,7 @@ class Blog extends Component {
     this.setState({
       selectArticle: selectArticle === targetId ? '' : targetId
     });
-  }
+  };
 
   render () {
 
@@ -114,7 +115,7 @@ class Blog extends Component {
           backgroundColor: 'inherit'
         }
       },
-    ]
+    ];
 
     return (
       <div className="Blog">

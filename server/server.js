@@ -21,7 +21,10 @@ const {
 const app = new Koa();
 
 // define constants
-const SERVER_PORT = process.env.PORT || 8090;
+let SERVER_PORT = 8090;
+if (process.env.NODE_ENV !== "production") {
+  SERVER_PORT = process.env.PORT || 8090;
+}
 
 //========= Pretreatment =============================
 if (process.env.NODE_ENV !== 'production') {
