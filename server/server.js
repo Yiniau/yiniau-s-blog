@@ -5,7 +5,6 @@ const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const morgan = require('koa-morgan');
 const paths = require('../config/paths');
-// const bodyParser = require('koa-bodyparser');
 
 // controllers路径
 const {
