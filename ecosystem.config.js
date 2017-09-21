@@ -35,7 +35,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:Yiniau/yiniau-s-blog.git',
       path : '/home/yiniau/yiniau-s-blog',
-      'post-deploy' : 'cd /home/yiniau/yiniau-s-blog/server && npm install && cd /home/yiniau/yiniau-s-blog && npm install && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'cd /home/yiniau/yiniau-s-blog/server && npm install && cd /home/yiniau/yiniau-s-blog && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
       "env"  : {
         "NODE_ENV": "production"
       }
