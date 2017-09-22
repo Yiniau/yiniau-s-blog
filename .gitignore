@@ -2,7 +2,6 @@
 
 # Editor files
 /.idea
-/.storybook
 /.vscode
 
 # dependencies
@@ -18,6 +17,10 @@
 # production
 /build
 
+#storybook test
+/.storybook
+/stories
+
 # misc
 .DS_Store
 .env.local
@@ -28,4 +31,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-

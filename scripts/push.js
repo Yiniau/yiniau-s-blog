@@ -16,20 +16,21 @@ const {
   error,
 } = console;
 
-
+// 文章hash映射表
 const FILE_HASH_MAP = new Map();
+// options of fs.watch()
 const WATCH_CONFIG = {
   persistent: true,
   recursive: false,
   encoding: 'utf8',
 };
+// options of fs.openSync() || fs.open()
 const OPEN_SYNC_CONFIG = {
   flags: 'w+',
   encoding: 'utf8',
-  fd: null,
   mode: 0o666,
-  autoClose: true
 };
+// options of fs.createWriteStream()
 const WRITE_STREAM_CONFIG = {
   flags: 'w+',
   encoding: 'utf8',
@@ -48,10 +49,11 @@ function setFileMap(dir) {
   try {
     fs.readdirSync(dir)
       .filter(fn => !fn.startsWith('.')) // 去掉不需要的文件
-      .filter(fn => !fn.endsWith('.js')) // 去掉不需要的文件
-      .forEach(function insertIntoMap(dn) { //
-        const cfns = fs.readdirSync(`${dir}/${dn}`);
-        cfns.forEach(cfn => {
+      .filter(fn => !fn.endsWith('.js'))
+      .forEach(function insertIntoMap(dn) { // 对每个分类文件夹进行访问
+        const cfilenames = fs.readdirSync(`${dir}/${dn}`); // 获取每个分类下的文件名
+        cfilenames.forEach(cfn => {
+          // 读取文件并使用crypto解析成md5码，写入FILE_HASH_MAP映射中
           const buffer = fs.readFileSync(`${dir}/${dn}/${cfn}`);
           const hash = crypto.createHash('md5');
           hash.update(buffer);
@@ -84,7 +86,9 @@ function makeHashFile(dir) {
         wstream.on('finish', () => log('write stream finished'));
         wstream.write('module.exports = {\n');
         FILE_HASH_MAP.forEach((v, k) => {
-          wstream.write(`  '${v}': '${k}',\n`);
+          // 当对象属性key中含有中文时似乎会引发编码混乱
+          // 因此储存为文件的时候选择了将md5作为key
+          wstream.write(`\r\r'${v}': '${k}',\n`);
         });
         wstream.end('}');
       }
