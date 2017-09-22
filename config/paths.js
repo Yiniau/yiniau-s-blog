@@ -49,6 +49,7 @@ module.exports = {
   mdArticles: resolveApp('articles'),
   appSrc: resolveApp('src'),
   appComponents: resolveApp('src/components'),
+  appLib: resolveApp('server/lib'),
   appServer: resolveApp('server'), // path to server
   appServerConfig: resolveApp('server/config'),
   appServerControllers: resolveApp('server/controllers'),// path to server/controllers

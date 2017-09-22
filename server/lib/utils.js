@@ -28,42 +28,24 @@ function methodMapping(router, mapping) {
 }
 
 /**
- * 文件树路径解析函数
- * @param {String} path 需要解析的根路径
- * @return {Object} 文件树对象
+ * 将目录结构解析成一个数组
+ * @param {Object} fs node filesystem
+ * @param {String} dir 需要解析的根路径
+ * @return {Array} 文件路径数组，以文件夹分类
  */
-function getArticleDir(path) {
-  const paths = fs.readdirSync(path);
-  const dir = Object.create(null);
-  paths.map((p) => {
-    if (p.endsWith('.md')) {
-      dir[p] = p;
-      return null;
-    }
-    dir[p] = getArticleDir(`${path}/${p}`);
-    return null;
-  });
-  return dir;
+function getPaths(fs, dir) {
+  let paths = [];
+    fs.readdirSync(dir)
+    .filter(fn => !fn.startsWith('.')) // 去掉不需要的文件
+    .forEach(function insertIntoMap(dn) {
+      const cfns = fs.readdirSync(`${dir}/${dn}`).filter(fn => fn.startsWith('.'));
+      paths.push({
+        folder: dn,
+        files: cfns,
+      })
+    });
+  return paths;
 }
-
-/**
- * 将2层的文件树对象转换成单层的数组
- * @param dir {Object} 两层的文件树
- * @returns {Array}
- */
-function obj2KeyValue(dir) {
-  const en = Object.entries(dir);
-  const result = [];
-  en.reduce((res, cur) => {
-    Object.keys(cur[1]).map(key => res.push([
-      `${cur[0]}/${key}`,
-      key.slice(0, -3)
-    ]));
-    return res;
-  }, result);
-  return result;
-}
-// obj2KeyValue(getArticleDir(paths.mdArticles));
 
 /**
  * 将markdown字符串解析成html字符串
@@ -142,8 +124,8 @@ function saveAsHTML(h5Str, fileName) {
 
 module.exports = {
   methodMapping,
-  getArticleDir,
+  getPaths,
   resolveMarkdown,
   saveAsHTML,
-  obj2KeyValue,
 };
+

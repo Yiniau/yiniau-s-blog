@@ -8,7 +8,7 @@ module.exports = {
     // First application
     {
       name      : 'blog-api-server',
-      script    : '~/yiniau-s-blog/server/server.js',
+      script    : './server/server.js',
       env: {
         COMMON_VARIABLE: 'true'
       },
@@ -34,8 +34,8 @@ module.exports = {
       host : '45.77.16.113',
       ref  : 'origin/master',
       repo : 'git@github.com:Yiniau/yiniau-s-blog.git',
-      path : '~/yiniau-s-blog',
-      'post-deploy' : 'cd ~/yiniau-s-blog/server && npm install && cd ~/yiniau-s-blog && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      path : '/home/yiniau/yiniau-s-blog',
+      'post-deploy' : 'cd /home/yiniau/yiniau-s-blog/server && npm install && cd /home/yiniau/yiniau-s-blog && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
       "env"  : {
         "NODE_ENV": "production"
       }
