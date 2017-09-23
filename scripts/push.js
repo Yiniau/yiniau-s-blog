@@ -153,6 +153,11 @@ function getChangedFilesList() {
   return pushList;
 }
 
+/**
+ * 将需要推送的文件推送到服务器
+ * @param user 登陆服务器的身份
+ * @param ip  服务器的ip
+ */
 function pushToRemote (user, ip) {
   exec('clear');
   log(`now push.js run in ${blue(process.cwd().toString())}`);
