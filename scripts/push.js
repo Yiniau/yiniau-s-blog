@@ -2,9 +2,14 @@
 
 
 const fs = require('fs');
-const chalk = require('chalk');
 const paths = require('../config/paths');
 const crypto = require('crypto');
+const {
+  red,
+  blue,
+  green,
+  yellow,
+} = require('chalk');
 const {
   cd,
   echo,
@@ -20,6 +25,9 @@ const {
 const {
   log,
   error,
+  dir,
+  table,
+  group,
 } = console;
 
 // 文章hash映射表
@@ -145,12 +153,34 @@ function getChangedFilesList() {
   return pushList;
 }
 
-// setFileMap(paths.mdArticles);
-// makeHashFile(paths.mdArticles);
-// log(fs.readFileSync(paths.mdArticles + '/hash.js').toString());
+function pushToRemote (user, ip) {
+  exec('clear');
+  log(`now push.js run in ${blue(process.cwd().toString())}`);
+  const path = paths.mdArticles + '/hash.js';
 
-// log(restoreStructure(require(paths.mdArticles + '/hash.js')));
+  // 更新hash.js文件
+  log('making hash.js first...');
+  setFileMap(paths.mdArticles);
+  makeHashFile(paths.mdArticles);
+  log(`... ${green('down')}`);
 
-// getChangedFile();
+  // 上传
+  try {
+    log(`the files should be pushed :`);
+    const fileList = getChangedFilesList();
+    for (let fn of fileList) {
+      log('  ' + yellow(fn) + '  ...');
+      exec(`scp -v ${paths.mdArticles}/${fn} ${user}@${ip}:~/github/yiniau-s-blog/articles/${fn}`);
+    }
+  } catch (e) {
+    error(e)
+  }
+}
 
-// log(Object.entries({a:1,b:2,c:3}));
+// pushToRemote();
+
+log(`now push.js run in ${blue(process.cwd().toString())}`);
+log(`the file should be push was :`);
+for (let fn of ['asd','asd','aaaaa','asdewfas']) {
+  log('    ' + green(fn));
+}
