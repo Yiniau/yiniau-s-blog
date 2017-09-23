@@ -5,6 +5,12 @@ const fs = require('fs');
 const chalk = require('chalk');
 const paths = require('../config/paths');
 const crypto = require('crypto');
+const {
+  cd,
+  echo,
+  exec,
+  which,
+} = require('shelljs');
 
 const {
   getPaths,
@@ -67,6 +73,7 @@ function setFileMap(dir) {
 
 /**
  * save the FILE_HASH_MAP to local file
+ *   储存结构为数组[[map.key, map.value]]
  * @param dir
  */
 function makeHashFile(dir) {
@@ -84,13 +91,13 @@ function makeHashFile(dir) {
         const wstream = fs.createWriteStream(path, {...WRITE_STREAM_CONFIG, fd});
         wstream.on('close', () => log('fd or stream had closed'));
         wstream.on('finish', () => log('write stream finished'));
-        wstream.write('module.exports = {\n');
+        wstream.write('module.exports = [\n');
         FILE_HASH_MAP.forEach((v, k) => {
           // 当对象属性key中含有中文时似乎会引发编码混乱
           // 因此储存为文件的时候选择了将md5作为key
-          wstream.write(`\r\r'${v}': '${k}',\n`);
+          wstream.write(`\r\r['${k}', '${v}'],\n`);
         });
-        wstream.end('}');
+        wstream.end(']');
       }
     });
   } catch (e) {
@@ -101,16 +108,49 @@ function makeHashFile(dir) {
   // })
 }
 
-function isFileChanged(dir) {
-  fs.readdir()
+/**
+ * 将map反向存储在hash.js中的数据对象还原成
+ * @param arr
+ * @returns {Map}
+ */
+function restoreStructure(arr) {
+  return new Map(arr);
 }
 
-setFileMap(paths.mdArticles);
-log(fs.readFileSync(paths.mdArticles + '/hash.js').toString());
-makeHashFile(paths.mdArticles);
-// FILE_HASH_MAP.forEach((V, K) => {
-//   log({V, K});
-// });
-// const buffer = fs.readFileSync(paths.mdArticles + '/javascript/test-rename.md');
-// hash.update(buffer);
-// log(hash.digest('hex'));
+/**
+ * 通过对比md5值判断需要被推送到服务器的文件
+ *    约定：
+ *      远端服务器的hash文件名称为 hash.js, 储存到本地并重命名为 remote.hash.js
+ * @returns {Array}
+ */
+function getChangedFilesList() {
+  if (!which('scp')){
+    throw new Error('commond scp not exsited');
+  }
+  exec('scp -v yiniau@45.77.16.113:~/github/yiniau-s-blog/articles/hash.js ~/github/yiniau-s-blog/articles/remote.hash.js');
+  const remoteHash = require(paths.mdArticles + '/remote.hash.js');
+  const localHash = require(paths.mdArticles + '/hash.js');
+
+  const remoteHashMap = restoreStructure(remoteHash);
+  const localHashMap = restoreStructure(localHash);
+
+  const pushList = [];
+  localHashMap.forEach((v, k) => {
+    if (remoteHashMap.has(k)) {
+      remoteHashMap.get(k) === v || pushList.push(v);
+    } else {
+      pushList.push(v);
+    }
+  });
+  return pushList;
+}
+
+// setFileMap(paths.mdArticles);
+// makeHashFile(paths.mdArticles);
+// log(fs.readFileSync(paths.mdArticles + '/hash.js').toString());
+
+// log(restoreStructure(require(paths.mdArticles + '/hash.js')));
+
+// getChangedFile();
+
+// log(Object.entries({a:1,b:2,c:3}));
