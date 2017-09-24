@@ -98,7 +98,7 @@ function makeHashFile(dir) {
         FILE_HASH_MAP.forEach((v, k) => {
           // 当对象属性key中含有中文时似乎会引发编码混乱
           // 因此储存为文件的时候选择了将md5作为key
-          wstream.write(`\r\r['${k}', '${v}'],\n`);
+          wstream.write(`  ['${k}', '${v}'],\n`);
         });
         wstream.end(']');
       }
@@ -126,23 +126,24 @@ function restoreStructure(arr) {
  *      远端服务器的hash文件名称为 hash.js, 储存到本地并重命名为 remote.hash.js
  * @returns {Array}
  */
-function getChangedFilesList() {
+function getChangedFilesList(user, ip) {
   if (!which('scp')){
     throw new Error('commond scp not exsited');
   }
-  exec('scp -v yiniau@45.77.16.113:~/github/yiniau-s-blog/articles/hash.js ~/github/yiniau-s-blog/articles/remote.hash.js');
+  exec(`scp ${user}@${ip}:~/github/yiniau-s-blog/articles/hash.js ~/github/yiniau-s-blog/articles/remote.hash.js`);
   const remoteHash = require(paths.mdArticles + '/remote.hash.js');
   const localHash = require(paths.mdArticles + '/hash.js');
 
+  log(remoteHash);
   const remoteHashMap = restoreStructure(remoteHash);
   const localHashMap = restoreStructure(localHash);
 
   const pushList = [];
   localHashMap.forEach((v, k) => {
     if (remoteHashMap.has(k)) {
-      remoteHashMap.get(k) === v || pushList.push(v);
+      remoteHashMap.get(k) === v || pushList.push(k);
     } else {
-      pushList.push(v);
+      pushList.push(k);
     }
   });
   return pushList;
@@ -153,7 +154,7 @@ function getChangedFilesList() {
  * @param user 登陆服务器的身份
  * @param ip  服务器的ip
  */
-function pushToRemote (user, ip) {
+function pushToRemote (user, ip, fileList) {
   exec('clear');
   log(`now push.js run in ${blue(underline(process.cwd().toString()))}`);
   const path = paths.mdArticles + '/hash.js';
@@ -167,14 +168,18 @@ function pushToRemote (user, ip) {
   // 上传
   try {
     log(`the files should be pushed :`);
-    const fileList = getChangedFilesList();
+    // const fileList = getChangedFilesList(user, ip);
     for (let fn of fileList) {
       log('  ' + yellow(fn) + '  ...');
-      exec(`scp -v ${paths.mdArticles}/${fn} ${user}@${ip}:~/github/yiniau-s-blog/articles/${fn}`);
+      const folderTitle = fn.split('/');
+      exec(`ssh ${user}@${ip} mkdir /home/yiniau/github/yiniau-s-blog/articles/${folderTitle[0]}`);
+      exec(`scp -r ${paths.mdArticles}/${fn} ${user}@${ip}:~/github/yiniau-s-blog/articles/${fn}`);
     }
   } catch (e) {
     error(e)
   }
 }
 
-pushToRemote(USER, IP);
+const fileList = getChangedFilesList(USER, IP);
+log(fileList);
+pushToRemote(USER, IP, fileList);

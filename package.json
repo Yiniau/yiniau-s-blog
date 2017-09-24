@@ -52,7 +52,7 @@
   },
   "scripts": {
     "store": "node scripts/store.js",
-    "push": "node scripts/push.js",
+    "push": "node scripts/push.js yiniau 45.77.16.113",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",

@@ -7,7 +7,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/yiniau-s-blog:/app
+      - ~/github/yiniau-s-blog:/app
     ports:
       - 8090:8090
     command: npm run docker-compose-deploy
