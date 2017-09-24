@@ -21,8 +21,8 @@ class Article extends Component {
       title,
     } = this.props.match.params;
     // const serverUrl = 'http://localhost:9999';
-    const serverUrl = 'http://localhost:8090';
-    // const serverUrl = 'http://yiniau.com';
+    // const serverUrl = 'http://localhost:8090';
+    const serverUrl = 'http://yiniau.com';
 
     fetch(`${serverUrl}/api/getArticle?title=${title.toString()}`, {
       method: 'GET',
