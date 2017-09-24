@@ -20,8 +20,10 @@ class Article extends Component {
     const {
       title,
     } = this.props.match.params;
+    // const serverUrl = 'http://localhost:9999';
+    const serverUrl = 'http://yiniau.com';
 
-    fetch(`http://localhost:3090/api/getArticle?title=${title.toString()}`, {
+    fetch(`${serverUrl}/api/getArticle?title=${title.toString()}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

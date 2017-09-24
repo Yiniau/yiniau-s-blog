@@ -9,6 +9,7 @@ const {
   blue,
   green,
   yellow,
+  underline,
 } = require('chalk');
 const {
   cd,
@@ -16,18 +17,9 @@ const {
   exec,
   which,
 } = require('shelljs');
-
-const {
-  getPaths,
-// } = require(paths.appLib);
-} = require('../server/lib/utils');
-
 const {
   log,
   error,
-  dir,
-  table,
-  group,
 } = console;
 
 // 文章hash映射表
@@ -52,6 +44,9 @@ const WRITE_STREAM_CONFIG = {
   mode: 0o666,
   autoClose: true
 };
+// user and ip
+const USER = process.argv[2];
+const IP = process.argv[3];
 
 
 /**
@@ -160,7 +155,7 @@ function getChangedFilesList() {
  */
 function pushToRemote (user, ip) {
   exec('clear');
-  log(`now push.js run in ${blue(process.cwd().toString())}`);
+  log(`now push.js run in ${blue(underline(process.cwd().toString()))}`);
   const path = paths.mdArticles + '/hash.js';
 
   // 更新hash.js文件
@@ -182,10 +177,4 @@ function pushToRemote (user, ip) {
   }
 }
 
-// pushToRemote();
-
-log(`now push.js run in ${blue(process.cwd().toString())}`);
-log(`the file should be push was :`);
-for (let fn of ['asd','asd','aaaaa','asdewfas']) {
-  log('    ' + green(fn));
-}
+pushToRemote(USER, IP);

@@ -3,8 +3,7 @@
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const {
-  getArticleDir,
-  obj2KeyValue,
+  getPaths,
 } = require('./utils');
 const {
   mdArticles
@@ -29,19 +28,6 @@ const es7FsOpen = url => {
   });
 };
 
-
-/**
- * 对两层的文章地址进行处理，获得完整地址
- *  eg： /usr/admin/db/articles/xxx.md
- * @returns {*}
- */
-function getFullDir() {
-  const dir = obj2KeyValue(getArticleDir(mdArticles));
-  if (!Array.isArray(dir)) {
-    throw new TypeError('dir should be a array or having a map method');
-  }
-  return dir.map(d => [mdArticles + '/' + d[0], d[1], d[0].split('/')]); // get all articles' full path
-}
 
 /**
  * 获取对应collection，返回collection和db连接
@@ -82,25 +68,18 @@ async function getCollection(name, MC) {
  */
 async function saveArticles(fullDir, MC) {
   try {
-    // {
-    //   title: String,
-    //   tags: [String],
-    //   categories: String,
-    //   content: String,
-    //   putTime: String,
-    //   editTime: String,
-    // }
     fullDir.forEach(async d => {
       try {
         const {db, col} = await getCollection('articles', MC);
         const data = await es7FsOpen(d[0]);
+        const stat = fs.statSync(d[0]);
         const result = await col.insert({
-          title: d[1],
-          tags: [],
-          categories: d[2][0],
+          title: d[2],
+          tags: d[1],
+          categories: d[1],
           content: data.toString(),
-          putTime: new Date(),
-          editTime: new Date(),
+          putTime: stat.birthtime,
+          editTime: stat.atime,
         });
         console.log(result);
         db.close();
@@ -187,11 +166,6 @@ async function getTitlesByCategory(cate, MC) {
     console.error(e);
   }
 }
-
-// getTitlesByCategory('docker', MongoClient).then(data => console.log(data));
-
-// getArticleByTitle('E10S-Multi-WebExtension-APIs-CSS-clip-path-md', MongoClient)
-//   .then(data => console.log(data));
 
 module.exports = {
   MongoClient,

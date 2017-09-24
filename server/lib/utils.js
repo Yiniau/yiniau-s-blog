@@ -37,8 +37,11 @@ function getPaths(fs, dir) {
   let paths = [];
     fs.readdirSync(dir)
     .filter(fn => !fn.startsWith('.')) // 去掉不需要的文件
+    .filter(fn => !fn.endsWith('.js')) // 去掉不需要的文件
     .forEach(function insertIntoMap(dn) {
-      const cfns = fs.readdirSync(`${dir}/${dn}`).filter(fn => fn.startsWith('.'));
+      const cfns = fs.readdirSync(`${dir}/${dn}`)
+        .filter(fn => !fn.startsWith('.'))
+        .filter(fn => !fn.endsWith('.js'));
       paths.push({
         folder: dn,
         files: cfns,
@@ -121,10 +124,29 @@ function saveAsHTML(h5Str, fileName) {
   }
 }
 
+/**
+ * 对两层的文章地址进行处理，获得完整地址
+ *  eg： /usr/admin/db/articles/xxx.md
+ * @returns {Array} [[full_dir, folder, title]]
+ */
+function getFullDir(fs, dir) {
+  const paths = [];
+  const dpaths = getPaths(fs, dir);
+  if (!Array.isArray(dpaths)) {
+    throw new TypeError('dir should be a array or having a map method');
+  }
+  dpaths.forEach((f => {
+    f.files.map(fn => {
+      paths.push([`${dir}/${f.folder}/${fn}`, f.folder, fn.slice(0, -3)])
+    })
+  }));
+  return paths;
+}
 
 module.exports = {
   methodMapping,
   getPaths,
+  getFullDir,
   resolveMarkdown,
   saveAsHTML,
 };
