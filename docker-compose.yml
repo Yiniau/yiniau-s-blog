@@ -9,7 +9,7 @@ services:
     volumes:
       - ~/github/yiniau-s-blog:/app
       - ~/log/access.log:/log/access.log
-    links:
+    external_links:
       - mongodb:db
     ports:
       - 8090:8090
