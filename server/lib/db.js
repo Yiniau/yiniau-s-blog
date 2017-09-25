@@ -10,8 +10,8 @@ const {
 } = require('../../config/paths');
 
 let DB_SERVER_URL = 'mongodb://localhost:27017';
-if (process.env.DB_PORT) {
-  DB_SERVER_URL = `mongodb://${process.env.DB_PORT.split('//')[1]}`
+if (process.env.NODE_ENV === 'production') {
+  DB_SERVER_URL = `mongodb://db:27017`
 }
 
 /**
