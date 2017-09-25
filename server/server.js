@@ -45,10 +45,11 @@ if (process.env.NODE_ENV !== 'production') {
       { stream: fs.createWriteStream('/log/access.log', { flags: 'a' }) }
     ),
   ]));
-  app.use(async (ctx, next) =>{
-    ctx.type = 'html';
-    ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
-  })
+  // app.use(async (ctx, next) =>{
+  //   ctx.type = 'html';
+  //   ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
+  // })
+  // 将静态资源服务转移到nginx
 }
 //====================================================
 
