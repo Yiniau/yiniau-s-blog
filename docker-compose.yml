@@ -39,4 +39,4 @@ services:
         - ~/github/yiniau-s-blog/build:/app
       ports:
         - "5000:5000"
-      command: npm i -g serve && serve -s /app
+      command: serve -s /app
