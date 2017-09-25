@@ -13,6 +13,4 @@ services:
       - mongodb:db
     ports:
       - 8090:8090
-    expose:
-      -
     command: npm run docker-compose-deploy
