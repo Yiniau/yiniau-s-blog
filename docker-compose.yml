@@ -39,4 +39,4 @@ services:
         - ~/github/yiniau-s-blog:/app
       ports:
         - "5000:5000"
-      command: serve -s /app
+      command: serve -s /app/build
