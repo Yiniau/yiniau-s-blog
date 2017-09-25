@@ -1,6 +1,20 @@
 version: '3'
 
 services:
+  mongodb:
+      image: mongo:3.4
+      container_name: "mongodb"
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/var/log
+      volumes:
+        - ~/db/mongo-data:/data/db
+        - ~/db/mongo-log:/var/log
+      ports:
+        - "27017:27017"
+      expose:
+        - "27017"
+      command: mongod --smallfiles --logpath /var/log/log.log --logappend --dbpath /data/db
   node:
     build: ./docker/node
     container_name: "node"
@@ -9,8 +23,10 @@ services:
     volumes:
       - ~/github/yiniau-s-blog:/app
       - ~/log/access.log:/log/access.log
-    external_links:
+    links:
       - mongodb:db
+    depends_on:
+      - mongodb
     ports:
       - "8090:8090"
     command: npm run docker-compose-deploy
