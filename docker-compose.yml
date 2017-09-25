@@ -12,5 +12,5 @@ services:
     external_links:
       - mongodb:db
     ports:
-      - 8090:8090
+      - "8090:8090"
     command: npm run docker-compose-deploy
