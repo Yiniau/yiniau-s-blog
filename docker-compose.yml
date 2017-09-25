@@ -9,6 +9,10 @@ services:
     volumes:
       - ~/github/yiniau-s-blog:/app
       - ~/log/access.log:/log/access.log
+    links:
+      - mongodb:db
     ports:
       - 8090:8090
+    expose:
+      -
     command: npm run docker-compose-deploy

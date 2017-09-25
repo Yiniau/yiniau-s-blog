@@ -9,6 +9,10 @@ const {
   mdArticles
 } = require('../../config/paths');
 
+let DB_SERVER_URL = 'mongodb://localhost:27017';
+if (process.env.DB_PORT) {
+  DB_SERVER_URL = `mongodb://${process.env.DB_PORT.split('//')[1]}`
+}
 
 /**
  * 为了使用 async 函数打开文件的 polyfill
@@ -37,7 +41,7 @@ const es7FsOpen = url => {
  */
 async function getCollection(name, MC) {
   try {
-    const db = await MC.connect('mongodb://localhost:27017/blog');
+    const db = await MC.connect(`${DB_SERVER_URL}/blog`);
     return {
       db,
       col: db.collection(name),
