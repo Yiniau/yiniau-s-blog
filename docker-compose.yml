@@ -36,7 +36,7 @@ services:
       environment:
         - NODE_ENV:production
       volumes:
-        - ~/github/yiniau-s-blog/build:/app
+        - ~/github/yiniau-s-blog:/app
       ports:
         - "5000:5000"
       command: serve -s /app
