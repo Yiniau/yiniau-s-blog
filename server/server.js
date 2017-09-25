@@ -17,6 +17,7 @@ const {
   methodMapping,
 } = require(`${appServer}/lib/utils.js`);
 
+// TODO: 从http转移到https
 const app = new Koa();
 
 // define constants
