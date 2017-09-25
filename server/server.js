@@ -39,7 +39,7 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   app.use(compose([
     cors(require(`${appServerConfig}/corsConfig.js`)),
-    require('koa-static')(paths.appBuild, require('./config/staticServerConfig')),
+    // require('koa-static')(paths.appBuild, require('./config/staticServerConfig')),
     morgan(
       ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms',
       { stream: fs.createWriteStream('/log/access.log', { flags: 'a' }) }
@@ -49,7 +49,7 @@ if (process.env.NODE_ENV !== 'production') {
   //   ctx.type = 'html';
   //   ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
   // })
-  // 将静态资源服务转移到nginx
+  // 将静态资源服务转移到serve -s build
 }
 //====================================================
 
