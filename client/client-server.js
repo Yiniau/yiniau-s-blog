@@ -23,7 +23,7 @@ app.use(compose([
 app.use(async (ctx, next) =>{
   ctx.type = 'html';
   ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
-})
+});
 //====================================================
 
 

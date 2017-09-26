@@ -4,7 +4,6 @@ const compose = require('koa-compose');
 const logger = require('koa-logger');
 const cors = require('koa2-cors');
 const morgan = require('koa-morgan');
-const paths = require('../config/paths');
 
 // controllers路径
 const {
@@ -40,17 +39,11 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   app.use(compose([
     cors(require(`${appServerConfig}/corsConfig.js`)),
-    // require('koa-static')(paths.appBuild, require('./config/staticServerConfig')),
     morgan(
       ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms',
       { stream: fs.createWriteStream('/log/access.log', { flags: 'a' }) }
     ),
   ]));
-  // app.use(async (ctx, next) =>{
-  //   ctx.type = 'html';
-  //   ctx.body = await fs.createReadStream(paths.appBuild + '/index.html');
-  // })
-  // 将静态资源服务转移到serve -s build
 }
 //====================================================
 

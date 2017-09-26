@@ -9,10 +9,8 @@ const {
   mdArticles
 } = require('../../config/paths');
 
-let DB_SERVER_URL = 'mongodb://localhost:27017';
-if (process.env.NODE_ENV === 'production') {
-  DB_SERVER_URL = `mongodb://db:27017`
-}
+const DB_SERVER_URL = process.env.NODE_ENV === 'production' ?
+  'mongodb://db:27017' : 'mongodb://localhost:27017';
 
 /**
  * 为了使用 async 函数打开文件的 polyfill
@@ -108,7 +106,7 @@ async function saveData(data, col) {
  */
 async function getArticleByTitle(title, MC) {
   try {
-    console.log(title);
+    // console.log(title);
     const {db, col} = await getCollection('articles', MC);
     const docs = await col.find({title}).toArray();
     // console.log(docs);

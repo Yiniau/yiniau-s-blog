@@ -7,7 +7,8 @@
 .article .lang-javascript .hljs-keyword {
   color: #e92a00;
 }
-.article .lang-javascript .hljs-built_in {
+.article .lang-javascript .hljs-built_in,
+.article .lang-javascript .hljs-selector-tag, {
   color: #22ac7f;
 }
 .article .lang-javascript .hljs-title {

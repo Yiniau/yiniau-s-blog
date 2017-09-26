@@ -14,11 +14,16 @@ class NavButton extends Component {
     icon: PropTypes.string,
     boxStyle: PropTypes.object,
     textStyle: PropTypes.object,
+    shadowStyle: PropTypes.string,
     isActive: PropTypes.bool,
   };
   static defaultProps = {
     boxStyle: {},
     textStyle: {},
+    activeStyle: {
+      backgroundColor: 'rgba(62, 195, 255, 0.5)',
+      boxShadow: '0 1px 6px #00b2ff, 0 1px 4px #00b2ff',
+    },
     isActive: false,
   };
 
@@ -32,6 +37,7 @@ class NavButton extends Component {
       boxClassName,
       boxStyle,
       textStyle,
+      activeStyle,
       iconStyle,
       icon,
       content,
@@ -44,15 +50,13 @@ class NavButton extends Component {
         ? isa
           ? {
             ...boxStyle,
-            backgroundColor: 'rgba(62, 195, 255, 0.5)',
-            boxShadow: '0 1px 6px #00b2ff, 0 1px 4px #00b2ff',
+            ...activeStyle,
           } : boxStyle
         : isa
           ? {
             ...boxStyle,
+            ...activeStyle,
             justifyContent: 'center',
-            backgroundColor: 'rgba(62, 195, 255, 0.5)',
-            boxShadow: '0 1px 6px #00b2ff, 0 1px 4px #00b2ff',
           } : {
             ...boxStyle,
             justifyContent: 'center',

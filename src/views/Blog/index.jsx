@@ -21,15 +21,15 @@ import Article from './Article';
 import './Blog.css';
 
 //////=============static variable================
-// /****/const navListUrl = 'http://localhost:9999/api/getNavList';
+/****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-/****/const navListUrl = 'http://yiniau.com/api/getNavList';
+// /****/const navListUrl = 'http://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
   static defaultProps = {
     navBaseConfig : {
-      to: "/blog/javascript",
+      to: "/blog",
       icon: "fa fa-chevron-right",
       content: "error",
       iconStyle: { marginLeft: '2vw' },
@@ -68,6 +68,7 @@ class Blog extends Component {
           // console.log(data)
           const ntArray = Object.keys(data).map(navb => ({
             ...navBaseConfig,
+            to: `/blog/${navb}`,
             content: navb,
           }));
           // console.log(ntArray);
@@ -83,12 +84,23 @@ class Blog extends Component {
 
   // componentDidMount() {}
 
-  titleListEventHandler = (e) => {
-    const selectArticle = this.state.selectArticle;
-    const targetId = e.currentTarget.id;
+  folderListEventHandler = (e) => {
+    const selectFolder = this.state.selectFolder;
+    const ctargetId = e.currentTarget.id;
+
+    // console.log(e.currentTarget);
+    // console.log(e.target);
 
     this.setState({
-      selectArticle: selectArticle === targetId ? '' : targetId
+      selectFolder: selectFolder === ctargetId ? selectFolder : ctargetId,
+    });
+  };
+  titleListEventHandler = (e) => {
+    const selectArticle = this.state.selectArticle;
+    const ctargetId = e.currentTarget.id;
+
+    this.setState({
+      selectArticle: selectArticle === ctargetId ? selectArticle : ctargetId,
     });
   };
 
@@ -98,6 +110,7 @@ class Blog extends Component {
       articleTitleList,
       navTabConfigList,
       selectArticle,
+      selectFolder,
     } = this.state;
 
     const {
@@ -109,6 +122,7 @@ class Blog extends Component {
       {
         ...navBaseConfig,
         content: 'tags',
+        to: '/blog/tags',
         icon: 'fa fa-tags fa-lg',
         style: {
           width: '100%',
@@ -130,10 +144,8 @@ class Blog extends Component {
               <ALC
                 id={conf.content}
                 key={`alc-${conf.content}`}
-                onClick={this.titleListEventHandler}
-                boxStyle={{
-                  height: 'auto'
-                }}>
+                onClick={this.folderListEventHandler}
+                boxStyle={{height: 'auto'}}>
                 <NavButton
                   key={`nb-${conf.content}`}
                   to={conf.to}
@@ -141,10 +153,10 @@ class Blog extends Component {
                   content={conf.content}
                   textStyle={conf.textStyle}
                   iconStyle={conf.iconStyle}
-                  isActive={selectArticle === conf.content}/>
+                  isActive={selectFolder === conf.content}/>
                 <ALC
                   boxStyle={
-                    selectArticle === conf.content
+                    selectFolder === conf.content
                     ? {
                       opacity: '1',
                       padding: '0 20px',
@@ -156,12 +168,23 @@ class Blog extends Component {
                     }
                   }>
                   {articleTitleList[conf.content].map(title => (
-                    <NavButton
-                      key={`nb-${conf.content}-${title}`}
-                      to={`${conf.to}/${title}`}
-                      content={title}
-                      textStyle={conf.textStyle}
-                      iconStyle={conf.iconStyle}/>
+                    <ALC
+                      id={title}
+                      key={`alc-${conf.content}-${title}`}
+                      onClick={this.titleListEventHandler}
+                      boxStyle={{height: 'auto'}}>
+                      <NavButton
+                        key={`nb-${conf.content}-${title}`}
+                        to={`${conf.to}/${title}`}
+                        content={title}
+                        textStyle={conf.textStyle}
+                        iconStyle={conf.iconStyle}
+                        activeStyle={{
+                          backgroundColor: 'rgba(211, 62, 255, 0.5)',
+                          boxShadow: '0 1px 6px #a600ff, 0 1px 4px #a600ff',
+                        }}
+                        isActive={selectArticle === title}/>
+                    </ALC>
                   ))}
                 </ALC>
               </ALC>
