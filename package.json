@@ -27,7 +27,7 @@
     "koa-logger": "^3.0.1",
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.2.1",
-    "koa-static": "^4.0.1",
+    "koa-static-cache": "^5.1.1",
     "koa2-cors": "^2.0.3",
     "marked": "^0.3.6",
     "mongodb": "^2.2.31",
@@ -61,6 +61,7 @@
     "build-storybook": "build-storybook",
     "dev-server": "NODE_ENV=development PORT=9999 node ./server/server.js",
     "docker-compose-client-server": "NODE_ENV=production node /app/client/client-server.js",
+    "client-serve": "cd /app && npm i -g serve && serve -s build",
     "docker-compose-deploy": "NODE_ENV=production node /app/server/server.js"
   },
   "devDependencies": {

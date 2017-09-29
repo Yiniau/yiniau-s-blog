@@ -21,9 +21,9 @@ import Article from './Article';
 import './Blog.css';
 
 //////=============static variable================
-/****/const navListUrl = 'http://localhost:9999/api/getNavList';
+// /****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-// /****/const navListUrl = 'http://yiniau.com/api/getNavList';
+/****/const navListUrl = 'http://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
@@ -41,7 +41,8 @@ class Blog extends Component {
     navTabConfigList: [],
   };
 
-  // TODO: replace componentWillMount to componentDidMount
+  // 这里没有使用更通用的componentDidMount来获取数据
+  // 因为只需要获取一次，并不是会在后期互动时被更改的资源
   componentWillMount() {
     fetch(navListUrl, {
       method: 'GET',

@@ -1,5 +1,5 @@
 module.exports = {
-  maxage: 0,           // Browser cache max-age in milliseconds. 默认0
+  maxage: 24 * 60 * 60 * 1000,           // 缓存一天
   hidden: false,       // 允许传输隐藏文件。默认为false
   index: 'index.html', // Default file name, defaults to 'index.html'
   defer: false,        // If true, serves after return next(), 允许下游中间件先响应。

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 // TODO: [javascript, ] highlight
 import './article.css';
@@ -9,7 +9,9 @@ import './html.css';
 
 class Article extends Component {
 
-  static propTypes = {}
+  static propTypes = {
+
+  }
   static defaultProps = {
     match: {
       params: {
@@ -23,9 +25,9 @@ class Article extends Component {
   // Article从始至终都没有触发componentWillMount，猜测是由Route控制了生命周期，
   // fetch data需要在 componentDidMount 中进行，这也是react官方推荐的做法
   fetchData = (title) => {
-    const serverUrl = 'http://localhost:9999';
+    // const serverUrl = 'http://localhost:9999';
     // const serverUrl = 'http://localhost:8090';
-    // const serverUrl = 'http://yiniau.com';
+    const serverUrl = 'http://yiniau.com';
 
     // console.log(`fetch from ${serverUrl}/api/getArticle for ${title}`);
     fetch(`${serverUrl}/api/getArticle?title=${title}`, {
@@ -62,18 +64,7 @@ class Article extends Component {
     // console.log(`componentWillReceiveProps  nextProps=${nextProps} nextTitle=${nextProps.match.params.title}`);
     this.fetchData(nextProps.match.params.title);
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (!this.state.article) {
-  //     return true;
-  //   }
-  //   const nextTitle = nextProps.match.params.title;
-  //   const thisTitle = this.props.match.params.title;
-  //   console.log(`next title: ${nextTitle}`);
-  //   console.log(`this title: ${thisTitle}`);
-  //   const isEuq = nextTitle  === thisTitle;
-  //   console.log('article shouldComponentUpdate happend result is:' + !isEuq);
-  //   return !isEuq;
-  // }
+
 
   render () {
     let content = '<h1>loading</h1>';
