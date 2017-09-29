@@ -39,4 +39,4 @@ services:
         - ~/github/yiniau-s-blog:/app
       ports:
         - "5000:5000"
-      command: npm run docker-compose-client-server
+      command: npm run client-serve
