@@ -27,7 +27,7 @@ class Article extends Component {
   fetchData = (title) => {
     // const serverUrl = 'http://localhost:9999';
     // const serverUrl = 'http://localhost:8090';
-    const serverUrl = 'http://yiniau.com';
+    const serverUrl = 'https://yiniau.com';
 
     // console.log(`fetch from ${serverUrl}/api/getArticle for ${title}`);
     fetch(`${serverUrl}/api/getArticle?title=${title}`, {

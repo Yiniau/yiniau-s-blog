@@ -23,7 +23,7 @@ import './Blog.css';
 //////=============static variable================
 // /****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-/****/const navListUrl = 'http://yiniau.com/api/getNavList';
+/****/const navListUrl = 'https://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
