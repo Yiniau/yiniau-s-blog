@@ -9,6 +9,8 @@ const whiteList = process.env.NODE_ENV === 'production' ?
     'http://yiniau.com:8090',
     'http://45.77.16.113:5000',
     'http://45.77.16.113:8090',
+    'https://yiniau.com',
+    'https://yiniau.com:5000',
   ] : '*';
 
 module.exports = {
