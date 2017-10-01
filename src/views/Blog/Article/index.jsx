@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 
 // TODO: [javascript, ] highlight
 import './article.css';
@@ -29,7 +28,6 @@ class Article extends Component {
     // const serverUrl = 'http://localhost:8090';
     const serverUrl = 'https://yiniau.com';
 
-    // console.log(`fetch from ${serverUrl}/api/getArticle for ${title}`);
     fetch(`${serverUrl}/api/getArticle?title=${title}`, {
       method: 'GET',
       headers: {
@@ -61,7 +59,6 @@ class Article extends Component {
     this.fetchData();
   }
   componentWillReceiveProps(nextProps) {
-    // console.log(`componentWillReceiveProps  nextProps=${nextProps} nextTitle=${nextProps.match.params.title}`);
     this.fetchData(nextProps.match.params.title);
   }
 

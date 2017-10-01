@@ -4,7 +4,4 @@ const { getFullDir, getPaths } = require(appLib + '/utils');
 const { saveArticles } = require(appLib + '/db');
 const MC = require('mongodb').MongoClient;
 
-const { log } = console;
-
 saveArticles(getFullDir(fs, mdArticles), MC);
-// log(getFullDir(fs, mdArticles));

@@ -30,7 +30,7 @@ const WATCH_CONFIG = {
   recursive: false,
   encoding: 'utf8',
 };
-// options of fs.openSync() || fs.open()
+// options of fs.openSync() or fs.open()
 const OPEN_SYNC_CONFIG = {
   flags: 'w+',
   encoding: 'utf8',
@@ -107,8 +107,7 @@ function makeHashFile(dir) {
     error(e)
   }
 
-  // fs.watch(paths.mdArticles + '/javascript', watchConfig, (eventType, filename) => {
-  // })
+  //TODO: 添加服务器上的文件监听，一旦articles文章更新则自动更新数据库数据
 }
 
 /**
@@ -168,7 +167,6 @@ function pushToRemote (user, ip, fileList) {
   // 上传
   try {
     log(`the files should be pushed :`);
-    // const fileList = getChangedFilesList(user, ip);
     for (let fn of fileList) {
       log('  ' + yellow(fn) + '  ...');
       const folderTitle = fn.split('/');

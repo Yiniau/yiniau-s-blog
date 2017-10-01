@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import {Route} from 'react-router-dom';
 
 import {
@@ -66,13 +65,11 @@ class Blog extends Component {
       .then(data => { // 将data放入state中
         this.setState((prevState, props) => {
           const { navBaseConfig } = props;
-          // console.log(data)
           const ntArray = Object.keys(data).map(navb => ({
             ...navBaseConfig,
             to: `/blog/${navb}`,
             content: navb,
           }));
-          // console.log(ntArray);
           return {
             articleTitleList: data,
             navTabConfigList: ntArray,
@@ -83,14 +80,10 @@ class Blog extends Component {
       .catch(e => console.error(e));
   }
 
-  // componentDidMount() {}
 
   folderListEventHandler = (e) => {
     const selectFolder = this.state.selectFolder;
     const ctargetId = e.currentTarget.id;
-
-    // console.log(e.currentTarget);
-    // console.log(e.target);
 
     this.setState({
       selectFolder: selectFolder === ctargetId ? selectFolder : ctargetId,

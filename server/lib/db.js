@@ -1,5 +1,4 @@
 "use strict"
-// const mongoose = require('mongoose');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const {
@@ -83,7 +82,6 @@ async function saveArticles(fullDir, MC) {
           putTime: stat.birthtime,
           editTime: stat.atime,
         });
-        console.log(result);
         db.close();
       } catch (e) {
         console.error(e);
@@ -106,10 +104,8 @@ async function saveData(data, col) {
  */
 async function getArticleByTitle(title, MC) {
   try {
-    // console.log(title);
     const {db, col} = await getCollection('articles', MC);
     const docs = await col.find({title}).toArray();
-    // console.log(docs);
     db.close();
     return docs;
   } catch (e) {
@@ -127,7 +123,6 @@ async function getTitlesByTags(tags, MC) {
   try {
     const {db, col} = await getCollection('articles', MC);
     const docs = await col.find({tags}, {title: 1}).toArray();
-    // console.log(docs);
     db.close();
     return docs;
   } catch (e) {
