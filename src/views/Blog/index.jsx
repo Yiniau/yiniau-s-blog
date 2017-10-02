@@ -20,9 +20,9 @@ import Article from './Article';
 import './Blog.css';
 
 //////=============static variable================
-// /****/const navListUrl = 'http://localhost:9999/api/getNavList';
+/****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-/****/const navListUrl = 'https://yiniau.com/api/getNavList';
+// /****/const navListUrl = 'https://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
@@ -32,7 +32,23 @@ class Blog extends Component {
       icon: "fa fa-chevron-right",
       content: "error",
       iconStyle: { marginLeft: '2vw' },
-    }
+    },
+
+    // 文章列表项激活样式
+    childActiveStyle : {
+      backgroundColor: 'rgba(211, 62, 255, 0.5)',
+      boxShadow: '0 1px 6px #a600ff, 0 1px 4px #a600ff',
+    },
+
+    // 文章列表容器基础样式
+    listShowStyle : {
+      opacity: '1',
+      padding: '0 20px',
+    },
+    listHideStyle : {
+      opacity: '0',
+      padding: '0 20px',
+    },
   };
 
   state = {
@@ -84,11 +100,11 @@ class Blog extends Component {
   folderListEventHandler = (e) => {
     const selectFolder = this.state.selectFolder;
     const ctargetId = e.currentTarget.id;
-
     this.setState({
-      selectFolder: selectFolder === ctargetId ? selectFolder : ctargetId,
+      selectFolder: selectFolder === ctargetId ? '' : ctargetId,
     });
   };
+
   titleListEventHandler = (e) => {
     const selectArticle = this.state.selectArticle;
     const ctargetId = e.currentTarget.id;
@@ -96,10 +112,10 @@ class Blog extends Component {
     this.setState({
       selectArticle: selectArticle === ctargetId ? selectArticle : ctargetId,
     });
+    e.stopPropagation(); // 停止传播以防止影响上层组件
   };
 
   render () {
-
     const {
       articleTitleList,
       navTabConfigList,
@@ -109,6 +125,9 @@ class Blog extends Component {
 
     const {
       navBaseConfig,
+      childActiveStyle,
+      listShowStyle,
+      listHideStyle,
     } = this.props;
 
     // 卡片导航区配置(static)
@@ -134,55 +153,53 @@ class Blog extends Component {
           <ALC>
             {/**********************************/}
             {/* navbuttons list                */}
-            {navTabConfigList.map((conf) => (
-              <ALC
-                id={conf.content}
-                key={`alc-${conf.content}`}
-                onClick={this.folderListEventHandler}
-                boxStyle={{height: 'auto'}}>
-                <NavButton
-                  key={`nb-${conf.content}`}
-                  to={conf.to}
-                  icon={conf.icon}
-                  content={conf.content}
-                  textStyle={conf.textStyle}
-                  iconStyle={conf.iconStyle}
-                  isActive={selectFolder === conf.content}/>
+            {navTabConfigList.map((conf) => {
+              const {
+                to,
+                content,
+                textStyle,
+                iconStyle,
+              } = conf;
+              return (
                 <ALC
-                  boxStyle={
-                    selectFolder === conf.content
-                    ? {
-                      opacity: '1',
-                      padding: '0 20px',
-                      height: `${articleTitleList[conf.content].length * 5}vh`,
-                    } : {
-                      opacity: '0',
-                      padding: '0 20px',
-                      height: 0,
-                    }
-                  }>
-                  {articleTitleList[conf.content].map(title => (
-                    <ALC
-                      id={title}
-                      key={`alc-${conf.content}-${title}`}
-                      onClick={this.titleListEventHandler}
-                      boxStyle={{height: 'auto'}}>
-                      <NavButton
-                        key={`nb-${conf.content}-${title}`}
-                        to={`${conf.to}/${title}`}
-                        content={title}
-                        textStyle={conf.textStyle}
-                        iconStyle={conf.iconStyle}
-                        activeStyle={{
-                          backgroundColor: 'rgba(211, 62, 255, 0.5)',
-                          boxShadow: '0 1px 6px #a600ff, 0 1px 4px #a600ff',
-                        }}
-                        isActive={selectArticle === title}/>
-                    </ALC>
-                  ))}
+                  id={content}
+                  key={`alc-${content}`}
+                  onClick={this.folderListEventHandler}>
+                  <NavButton
+                    key={`nb-${content}`}
+                    to={to}
+                    icon={conf.icon}
+                    content={content}
+                    textStyle={textStyle}
+                    iconStyle={iconStyle}
+                    isActive={selectFolder === content}/>
+                  <ALC
+                    boxStyle={
+                      selectFolder === content
+                      ? Object.assign(
+                        {height: `${articleTitleList[content].length * 5}vh`,},
+                        listShowStyle
+                      ) : Object.assign({height: 0,}, listHideStyle)
+                    }>
+                    {articleTitleList[content].map(title => (
+                      <ALC
+                        id={title}
+                        key={`alc-${content}-${title}`}
+                        onClick={this.titleListEventHandler}>
+                        <NavButton
+                          key={`nb-${content}-${title}`}
+                          to={`${to}/${title}`}
+                          content={title}
+                          textStyle={textStyle}
+                          iconStyle={iconStyle}
+                          activeStyle={childActiveStyle}
+                          isActive={selectArticle === title}/>
+                      </ALC>
+                    ))}
+                  </ALC>
                 </ALC>
-              </ALC>
-            ))}
+              )
+            })}
             {/**********************************/}
           </ALC>
 
@@ -209,6 +226,7 @@ class Blog extends Component {
     )
   }
 }
+
 
 export default Blog;
 
