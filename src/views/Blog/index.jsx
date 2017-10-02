@@ -12,8 +12,6 @@ import SideBar from './SideBar';
 import MainContent from './MainContent';
 // 文章分区类别
 import TabContent from './TabContent';
-// 文章标题导航容器
-import ALC from './ArticleListContainer';
 // the article self
 import Article from './Article';
 
@@ -96,7 +94,12 @@ class Blog extends Component {
       .catch(e => console.error(e));
   }
 
-
+  /**
+   * 侧边栏1级导航项点击事件处理函数
+   * @method folderListEventHandler
+   * @param  {SyntheticEvent}     e   React 合成事件
+   * @return {null}                   [null]
+   */
   folderListEventHandler = (e) => {
     const selectFolder = this.state.selectFolder;
     const ctargetId = e.currentTarget.id;
@@ -105,6 +108,12 @@ class Blog extends Component {
     });
   };
 
+  /**
+   * 侧边栏2级导航项点击事件处理函数
+   * @method titleListEventHandler
+   * @param  {SyntheticEvent}     e   React 合成事件
+   * @return {null}                   [null]
+   */
   titleListEventHandler = (e) => {
     const selectArticle = this.state.selectArticle;
     const ctargetId = e.currentTarget.id;
@@ -220,6 +229,7 @@ class Blog extends Component {
 
         </SideBar>
         <MainContent>
+          <Route path='/blgo/:folder component={}'/>
           <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>
@@ -227,6 +237,25 @@ class Blog extends Component {
   }
 }
 
+// 文章标题导航容器
+const ArticleListContainer = (props) => {
+  const {
+    id,
+    onClick,
+    boxStyle,
+    children,
+  } = props
+  return (
+    <div
+      id={id}
+      onClick={onClick}
+      className='alc'
+      style={boxStyle}>
+      {children}
+    </div>
+  )
+}
+const ALC = ArticleListContainer;
 
 export default Blog;
 
