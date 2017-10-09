@@ -9,12 +9,7 @@ class ImageButton extends Component {
   }
 
   static defaultProps = {
-    style: {
-      width: '90px',
-      height: '90px',
-      borderRadius: '100vw',
-      transition: 'all 0.5s ease-in-out',
-    }
+    style: {}
   }
 
   state = {
@@ -24,8 +19,8 @@ class ImageButton extends Component {
   /**
    * 将图片中心移动到元素的中心
    * @method centerImage
-   * @param  {eventObject}    e  event 事件对象
-   * @return {object}  null
+   * @param  {SyntheticEvent}    e  React 合成事件实例
+   * @return {object}               null
    */
   centerImage = (e) => {
     e.persist(); // 异步事件
@@ -47,7 +42,7 @@ class ImageButton extends Component {
   /**
    * 判断是否获得焦点
    * @method fouceChange
-   * @return {Object}   undefiend
+   * @return {null}   null;
    */
   fouceChange = () => this.setState({
     isOnfocus: !this.state.isOnfocus,

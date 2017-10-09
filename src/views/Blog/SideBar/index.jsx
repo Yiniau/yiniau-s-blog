@@ -5,7 +5,7 @@ const SideBar = (props) => {
   const style = {
     width: '15vw',
     minHeight: '100vh',
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: 'rgba(255, 255, 255, 0)',
 
     display: 'flex',
     flexDirection: 'column',

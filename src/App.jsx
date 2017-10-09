@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Route,
   Redirect,
+  Switch,
 } from 'react-router-dom';
 
 import {
@@ -11,10 +12,10 @@ import {
 class App extends Component {
   render() {
     return (
-      <div>
+      <Switch>
         <Redirect exact from='/' to='/blog'/>
         <Route path='/blog' component={Blog}/>
-      </div>
+      </Switch>
     );
   }
 }

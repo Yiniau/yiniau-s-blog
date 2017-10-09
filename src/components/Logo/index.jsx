@@ -20,7 +20,7 @@ class Logo extends Component {
   render () {
     const boxStyle = {
       width: '15vw',
-      margin: '5vh 0',
+      margin: '5vh 0 3vh',
 
       backgroundColo: 'rgba(255, 255, 255, 0)',
 

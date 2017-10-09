@@ -17,6 +17,8 @@ import Article from './Article';
 
 import './Blog.css';
 
+import fireworks from './fireworks';
+
 //////=============static variable================
 /****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
@@ -94,6 +96,16 @@ class Blog extends Component {
       .catch(e => console.error(e));
   }
 
+  componentDidMount() {
+    this.setState(prevState => {
+      const fw = fireworks();
+      // fireworks.setCanvasSize();
+      return {
+        fireworks: fw,
+      }
+    });
+  }
+
   /**
    * 侧边栏1级导航项点击事件处理函数
    * @method folderListEventHandler
@@ -105,6 +117,7 @@ class Blog extends Component {
     const ctargetId = e.currentTarget.id;
     this.setState({
       selectFolder: selectFolder === ctargetId ? '' : ctargetId,
+      selectArticle: '',
     });
   };
 
@@ -156,6 +169,7 @@ class Blog extends Component {
 
     return (
       <div className="Blog">
+        <canvas className="fireworks">canvas 不可用，请使用最新的现代浏览器</canvas>
         <SideBar className="deep-1">
           <Logo imgSrc={require('./avatar@0,5x.jpg')}/>
 
@@ -229,7 +243,6 @@ class Blog extends Component {
 
         </SideBar>
         <MainContent>
-          <Route path='/blgo/:folder component={}'/>
           <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>
@@ -256,6 +269,17 @@ const ArticleListContainer = (props) => {
   )
 }
 const ALC = ArticleListContainer;
+// 未选中准确文章时的文章浏览
+// const ArticleList = props => {
+//   const {  } = props;
+//   return (
+//     <div>
+//       <canvas>
+//
+//       </canvas>
+//     </div>
+//   )
+// }
 
 export default Blog;
 
