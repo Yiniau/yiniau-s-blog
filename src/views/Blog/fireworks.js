@@ -3,14 +3,15 @@ export default function fireworks() {
 
   const canvasEl = document.querySelector('.fireworks'); // 获取canvas元素
   const ctx = canvasEl.getContext('2d'); // getContext('2d')
-  const numberOfParticules = 25; // 圆点颗粒的数量
+  const numberOfParticules = 20; // 圆点颗粒的数量
+  const GRAVITY = 10; // 重力常量 10px/s^2 可在相关实体中覆盖常量
   let pointerX = 0;
   let pointerY = 0;
 
   // 移动端和pc端分界
   const tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
   // 颜色列表
-  const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+  const colors = ['#ff3074', '#18FF92', '#5A87FF', '#FBF38C'];
 
   /**
    * 设置canvas元素大小
@@ -41,12 +42,19 @@ export default function fireworks() {
    * @return {object}              p  颗粒 Particule
    */
   function setParticuleDirection(p) {
-    var angle = anime.random(0, 360) * Math.PI / 180;
-    var value = anime.random(50, 180);
-    var radius = [-1, 1][anime.random(0, 1)] * value;
+    const angle = anime.random(0, 360) * Math.PI / 180;
+    const value = anime.random(30, 120);
+    const radius = [-1, 1][anime.random(0, 1)] * value;
+    const changeLengthX = radius * Math.cos(angle);
+    const changeLengthY = radius * Math.sin(angle);
+
+    // let startSpeed = Math.log10(changeLengthY / 3 + 10) * 10; // 时长为3000 -> 3s
+    let startSpeed = changeLengthY / 3 / 5; // 时长为3000 -> 3s 收缩5倍的速度
+
     return {
-      x: p.x + radius * Math.cos(angle),
-      y: p.y + radius * Math.sin(angle)
+      x: p.x + changeLengthX,
+      y: p.y + changeLengthY,
+      startSpeed,
     }
   }
 
@@ -59,16 +67,39 @@ export default function fireworks() {
    */
   function createParticule(x,y) {
     var p = {};
-    p.x = x;
-    p.y = y;
+    // 基础样式设置
+    p.x = x - 12;
+    p.y = y - 12;
     p.color = colors[anime.random(0, colors.length - 1)];
-    p.radius = anime.random(16, 32);
+    p.width = anime.random(30, 40);
+    p.height = p.width + anime.random(-3, 3);
+    p.alpha = 1;
     p.endPos = setParticuleDirection(p);
+
+    // 重力相关
+    p.gravity = 10; // 重力效果 单位为 px/s^2
+    p.startTime = Date.now();
+    p.dropDeep = 0;
+    p.startSpeed = p.endPos.startSpeed; // 当前速度 单位为 px/s
+
     p.draw = function() {
+      ctx.globalAlpha = p.alpha;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true);
+      //  重力效果设置
+      if (GRAVITY && p.startTime) {
+        const g = p.gravity || GRAVITY;
+        // vt^2 - vo^2 = 2gh
+        // h = (vt^2 - vo^2) / 2g
+        const changeSpeed = (Date.now() - p.startTime) / 1000 * g;
+        const vo2 = Math.pow(p.startSpeed, 2);
+        const vt2 = Math.pow(p.startSpeed + changeSpeed, 2);
+        p.dropDeep = (vt2 - vo2) / 2 * g / 5;
+        // console.log(`startSpeed: ${p.startSpeed}`);
+      }
+      ctx.rect(p.x, p.y + p.dropDeep, p.width, p.height);
       ctx.fillStyle = p.color;
       ctx.fill();
+      ctx.globalAlpha = 1;
     }
     return p;
   }
@@ -80,14 +111,14 @@ export default function fireworks() {
    * @param  {Particule.y}     y Particule.y
    * @return {Particule}       颗粒
    */
-  function createCircle(x,y) {
+  function createCircle(x, y) {
     const p = {};
     p.x = x;
     p.y = y;
     p.color = '#333333';
     p.radius = 0.1;
-    p.alpha = .5;
-    p.lineWidth = 6;
+    p.alpha = 0.5;
+    p.lineWidth = 13;
     p.draw = function() {
       ctx.globalAlpha = p.alpha;
       ctx.beginPath();
@@ -106,9 +137,9 @@ export default function fireworks() {
    * @param  {animejs}        anim animejs引用
    */
   function renderParticule(anim) {
-    for (var i = 0; i < anim.animatables.length; i++) {
-      anim.animatables[i].target.draw();
-    }
+    anim.animatables.forEach(el => {
+      el.target.draw();
+    });
   }
 
   /**
@@ -126,16 +157,20 @@ export default function fireworks() {
     anime.timeline()
       .add({
         targets: particules,
-        x: function(p) { return p.endPos.x; },
-        y: function(p) { return p.endPos.y; },
-        radius: 0.1,
-        duration: anime.random(1200, 1800),
-        easing: 'easeOutExpo',
-        update: renderParticule
+        x: p => p.endPos.x,
+        // y: p => p.endPos.y,
+        // radius: 0.1,
+        width: 0,
+        height: 0,
+
+        duration: 3000,
+        // duration: ''
+        easing: 'linear',
+        update: renderParticule,
       })
       .add({
         targets: circle,
-        radius: anime.random(80, 160),
+        radius: anime.random(90, 160),
         lineWidth: 0,
         alpha: {
           value: 0,
@@ -145,7 +180,7 @@ export default function fireworks() {
         duration: anime.random(1200, 1800),
         easing: 'easeOutExpo',
         update: renderParticule,
-        offset: 0
+        offset: 0,
       });
   }
 
