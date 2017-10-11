@@ -3,7 +3,7 @@ export default function fireworks() {
 
   const canvasEl = document.querySelector('.fireworks'); // 获取canvas元素
   const ctx = canvasEl.getContext('2d'); // getContext('2d')
-  const numberOfParticules = 20; // 圆点颗粒的数量
+  const numberOfParticules = 15; // 圆点颗粒的数量
   const GRAVITY = 10; // 重力常量 10px/s^2 可在相关实体中覆盖常量
   let pointerX = 0;
   let pointerY = 0;
@@ -45,15 +45,15 @@ export default function fireworks() {
     const angle = anime.random(0, 360) * Math.PI / 180;
     const value = anime.random(30, 120);
     const radius = [-1, 1][anime.random(0, 1)] * value;
-    const changeLengthX = radius * Math.cos(angle);
-    const changeLengthY = radius * Math.sin(angle);
+    const moveX = radius * Math.cos(angle) * 3; // 加宽宽度，调节效果
+    const moveY = radius * Math.sin(angle) / 8; // 缩小爆发高度，即减低Y轴初速度
 
-    // let startSpeed = Math.log10(changeLengthY / 3 + 10) * 10; // 时长为3000 -> 3s
-    let startSpeed = changeLengthY / 3 / 5; // 时长为3000 -> 3s 收缩5倍的速度
+    // let startSpeed = Math.log10(moveY / 3 + 10) * 10; // 时长为3000 -> 3s
+    let startSpeed = moveY / 3; // 时长为3000 -> 3s 收缩5倍的速度
 
     return {
-      x: p.x + changeLengthX,
-      y: p.y + changeLengthY,
+      x: p.x + moveX,
+      // y: p.y + moveY,
       startSpeed,
     }
   }
@@ -65,13 +65,13 @@ export default function fireworks() {
    * @param  {Particule.y}        y Particule.y
    * @return {Particule}          颗粒
    */
-  function createParticule(x,y) {
+  function createParticule(x, y) {
     var p = {};
     // 基础样式设置
     p.x = x - 12;
     p.y = y - 12;
     p.color = colors[anime.random(0, colors.length - 1)];
-    p.width = anime.random(30, 40);
+    p.width = anime.random(20, 30);
     p.height = p.width + anime.random(-3, 3);
     p.alpha = 1;
     p.endPos = setParticuleDirection(p);
@@ -88,13 +88,12 @@ export default function fireworks() {
       //  重力效果设置
       if (GRAVITY && p.startTime) {
         const g = p.gravity || GRAVITY;
-        // vt^2 - vo^2 = 2gh
-        // h = (vt^2 - vo^2) / 2g
-        const changeSpeed = (Date.now() - p.startTime) / 1000 * g;
+        // v𝗍² - v₀² = 2gh
+        // ∆h = (v𝗍² - v₀²) ÷ 2g
+        const changedSpeed = (Date.now() - p.startTime) / 1000 * g;
         const vo2 = Math.pow(p.startSpeed, 2);
-        const vt2 = Math.pow(p.startSpeed + changeSpeed, 2);
-        p.dropDeep = (vt2 - vo2) / 2 * g / 5;
-        // console.log(`startSpeed: ${p.startSpeed}`);
+        const vt2 = Math.pow(p.startSpeed + changedSpeed, 2);
+        p.dropDeep = (vt2 - vo2) / 2 * g;
       }
       ctx.rect(p.x, p.y + p.dropDeep, p.width, p.height);
       ctx.fillStyle = p.color;
@@ -158,8 +157,6 @@ export default function fireworks() {
       .add({
         targets: particules,
         x: p => p.endPos.x,
-        // y: p => p.endPos.y,
-        // radius: 0.1,
         width: 0,
         height: 0,
 
@@ -170,7 +167,7 @@ export default function fireworks() {
       })
       .add({
         targets: circle,
-        radius: anime.random(90, 160),
+        radius: anime.random(90, 150),
         lineWidth: 0,
         alpha: {
           value: 0,

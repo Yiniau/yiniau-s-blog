@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import {
   Logo,
@@ -99,7 +99,8 @@ class Blog extends Component {
   componentDidMount() {
     this.setState(prevState => {
       const fw = fireworks();
-      // fireworks.setCanvasSize();
+
+      // 启动点击效果
       return {
         fireworks: fw,
       }
@@ -138,13 +139,14 @@ class Blog extends Component {
   };
 
   render () {
+    // state
     const {
       articleTitleList,
       navTabConfigList,
       selectArticle,
       selectFolder,
     } = this.state;
-
+    // props
     const {
       navBaseConfig,
       childActiveStyle,
