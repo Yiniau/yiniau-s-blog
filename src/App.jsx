@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom';
 
 import {
-  Blog
+  Blog,
+  Yiniau,
 } from './views/index.js';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       <Switch>
         <Redirect exact from='/' to='/blog'/>
         <Route path='/blog' component={Blog}/>
+        <Route path='/yiniau' component={Yiniau}/>
       </Switch>
     );
   }
