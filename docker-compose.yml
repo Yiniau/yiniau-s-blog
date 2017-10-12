@@ -64,5 +64,6 @@ services:
       - "5001:8090"
     command: npm run weixin-server
 networks:
+  defalut:
   app_net:
     external: true
