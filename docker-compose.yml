@@ -47,6 +47,7 @@ services:
       - NODE_ENV:production
     volumes:
       - ~/github/weixin-server:/app
+      - ~/log/koa-weixin-access.log:/log/koa-weixin-access.log
     ports:
       - "5001:8090"
     command: npm run weixin-server
