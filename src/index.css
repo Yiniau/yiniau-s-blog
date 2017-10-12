@@ -12,7 +12,7 @@ body {
   text-decoration: none;
 }
 
-canvas {
+.fireworks {
   background-color: rgba(#ec4a3f, 0);
   position: absolute;
 }
