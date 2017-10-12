@@ -10,6 +10,9 @@ services:
     volumes:
       - ~/db/mongo-data:/data/db
       - ~/db/mongo-log:/var/log
+    networks:
+      - defalut
+      - app_net
     ports:
       - "27017:27017"
     expose:
@@ -23,6 +26,9 @@ services:
     volumes:
       - ~/github/yiniau-s-blog:/app
       - ~/log/access.log:/log/access.log
+    networks:
+      - defalut
+      - app_net
     links:
       - mongodb:db
     depends_on:
@@ -37,6 +43,9 @@ services:
       - NODE_ENV:production
     volumes:
       - ~/github/yiniau-s-blog:/app
+    networks:
+      - defalut
+      - app_net
     ports:
       - "5000:5000"
     command: npm run client-serve
@@ -48,6 +57,12 @@ services:
     volumes:
       - ~/github/weixin-server:/app
       - ~/log/koa-weixin-access.log:/log/koa-weixin-access.log
+    networks:
+      - defalut
+      - app_net
     ports:
       - "5001:8090"
     command: npm run weixin-server
+networks:
+  app_net:
+    external: true
