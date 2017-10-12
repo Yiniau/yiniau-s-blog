@@ -20,9 +20,9 @@ import './Blog.css';
 import fireworks from './fireworks';
 
 //////=============static variable================
-/****/const navListUrl = 'http://localhost:9999/api/getNavList';
+// /****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-// /****/const navListUrl = 'https://yiniau.com/api/getNavList';
+/****/const navListUrl = 'https://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
