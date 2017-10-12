@@ -42,7 +42,7 @@ services:
     command: npm run client-serve
   node-weixin:
     build: ./docker/node
-    container_name: "node-client"
+    container_name: "node-weixin"
     environment:
       - NODE_ENV:production
     volumes:
