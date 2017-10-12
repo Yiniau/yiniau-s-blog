@@ -46,7 +46,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/weixin-yiniau-s-blog:/app
+      - ~/github/weixin-server:/app
     ports:
       - "5001:8090"
     command: npm run weixin-server
