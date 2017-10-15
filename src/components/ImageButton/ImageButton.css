@@ -3,9 +3,11 @@
   height: 90px;
   border-radius: 90px;
   transition: all 0.3s ease-in-out;
-  backgroundColor: rgb(255, 255, 255, 1);
-  overflow: auto;
+  background-color: rgb(255, 255, 255, 1);
+  overflow: hidden;
+  z-index: 10;
 }
 .ib img {
   position: relative;
+  z-index: 1;
 }

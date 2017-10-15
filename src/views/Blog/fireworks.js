@@ -23,7 +23,7 @@ export default function fireworks() {
     canvasEl.height = window.innerHeight * 2;
     canvasEl.style.width = window.innerWidth + 'px';
     canvasEl.style.height = window.innerHeight + 'px';
-    canvasEl.getContext('2d').scale(2, 2);
+    ctx.scale(2, 2);
   }
 
   /**
@@ -50,11 +50,10 @@ export default function fireworks() {
     const moveY = radius * Math.sin(angle) / 8; // 缩小爆发高度，即减低Y轴初速度
 
     // let startSpeed = Math.log10(moveY / 3 + 10) * 10; // 时长为3000 -> 3s
-    let startSpeed = moveY / 3; // 时长为3000 -> 3s 收缩5倍的速度
+    let startSpeed = moveY / 3; // 时长为3000 -> 3s 收缩3倍的速度
 
     return {
       x: p.x + moveX,
-      // y: p.y + moveY,
       startSpeed,
     }
   }
