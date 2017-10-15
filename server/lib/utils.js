@@ -1,6 +1,10 @@
 const fs = require('fs');
 const paths = require('../../config/paths.js');
 
+const {
+  log,
+} = console;
+
 /**
  * 路由注册函数
  * @param  {Object} router  koa-router的实例
@@ -8,22 +12,15 @@ const paths = require('../../config/paths.js');
  * @reutrn {Object} router  传入的router实例
  */
 function methodMapping(router, mapping) {
-  mapping.map((handler) => {
-    const url = Object.keys(handler)[0];
-    if (url.startsWith('GET')) {
-      const path = url.substring(4); // 截取路径
-      router.get(path, handler[url]); // register router
-      console.log(`register URL mapping: GET ${path}`);
-    } else if (url.startsWith('POST')) {
-      const path = url.substring(5);
-      router.post(path, handler[url]);
-      console.log(`register URL mapping: POST ${path}`);
-    } else {
-      console.log(`invalid URL: ${url}`);
-    }
-    return null;
+  mapping.forEach(handler => {
+    const url = Object.keys(handler)[0];              // e.g.  'GET /hello/:yiniau'
+    const urlarr = url.split(' ');                    // e.g.  ['GET', '/hello/:yiniau']
+    const method = urlarr[0].toLowerCase();           // e.g.  'get'
+    const path = urlarr[1];                           // e.g.  '/hello/:yiniau'
+    router[method](path, handler[url]); // register router
+    log(`register URL mapping: ${method} ${path}`);
   });
-  console.log('\r');
+  log('\r');
   return router;
 }
 

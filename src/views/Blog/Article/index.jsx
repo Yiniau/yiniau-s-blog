@@ -24,9 +24,9 @@ class Article extends Component {
   // Article从始至终都没有触发componentWillMount，猜测是由Route控制了生命周期，
   // fetch data需要在 componentDidMount 中进行，这也是react官方推荐的做法
   fetchData = (title) => {
-    // const serverUrl = 'http://localhost:9999';
+    const serverUrl = 'http://localhost:9999';
     // const serverUrl = 'http://localhost:8090';
-    const serverUrl = 'https://yiniau.com';
+    // const serverUrl = 'https://yiniau.com';
 
     fetch(`${serverUrl}/api/getArticle?title=${title}`, {
       method: 'GET',
@@ -72,7 +72,7 @@ class Article extends Component {
       editTime = article.editTime;
     }
 
-    let html = `${content} \r\n \`${editTime}\`` || '<h3>loading</h3>'
+    let html = `${content} \r\n ${editTime}` || '<h3>loading</h3>';
     return (
       <article
         className="article deep-1"

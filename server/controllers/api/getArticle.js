@@ -5,7 +5,6 @@ const {
 } = require('../../lib/db.js');
 
 const marked = require('../../config/markedConfig.js');
-
 module.exports = {
   'GET /api/getArticle': async (ctx, next) => {
     const titleUTF8 = ctx.request.header.referer.split('/').pop();
@@ -16,7 +15,7 @@ module.exports = {
     if (docs[0].content) {
       docs[0].content = await marked(docs[0].content);
     } else {
-      docs = '<h3>There seems to be a mistake</h3>';
+      docs = '<h3>There seems to have a mistake</h3>';
     }
     ctx.response.body = docs;
   }

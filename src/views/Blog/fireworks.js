@@ -1,4 +1,5 @@
 import anime from 'animejs';
+
 export default function fireworks() {
 
   const canvasEl = document.querySelector('.fireworks'); // 获取canvas元素
@@ -78,7 +79,7 @@ export default function fireworks() {
 
     // 重力相关
     p.gravity = 10; // 重力效果 单位为 px/s^2
-    p.startTime = Date.now();
+    p.startTime = performance.now();
     p.dropDeep = 0;
     p.startSpeed = p.endPos.startSpeed; // 当前速度 单位为 px/s
 
@@ -90,7 +91,7 @@ export default function fireworks() {
         const g = p.gravity || GRAVITY;
         // v𝗍² - v₀² = 2gh
         // ∆h = (v𝗍² - v₀²) ÷ 2g
-        const changedSpeed = (Date.now() - p.startTime) / 1000 * g;
+        const changedSpeed = (performance.now() - p.startTime) / 1000 * g;
         const vo2 = Math.pow(p.startSpeed, 2);
         const vt2 = Math.pow(p.startSpeed + changedSpeed, 2);
         p.dropDeep = (vt2 - vo2) / 2 * g;
@@ -136,9 +137,7 @@ export default function fireworks() {
    * @param  {animejs}        anim animejs引用
    */
   function renderParticule(anim) {
-    anim.animatables.forEach(el => {
-      el.target.draw();
-    });
+    anim.animatables.forEach(el => el.target.draw());
   }
 
   /**
@@ -161,7 +160,6 @@ export default function fireworks() {
         height: 0,
 
         duration: 3000,
-        // duration: ''
         easing: 'linear',
         update: renderParticule,
       })

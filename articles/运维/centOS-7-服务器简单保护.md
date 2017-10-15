@@ -51,6 +51,8 @@ sudo firewall-cmd --permanent --zone=public --add-port=443/tcp
 sudo firewall-cmd --permanent --zone=public --add-port=443/udp
 sudo firewall-cmd --permanent --zone=public --add-port=80/tcp
 sudo firewall-cmd --permanent --zone=public --add-port=3090/tcp
+sudo firewall-cmd --permanent --zone=public --remove-port=3090/tcp # 移除
+sudo firewall-cmd --permanent --zone=public --remove-port=5000/tcp # 移除
 sudo firewall-cmd --permanent --zone=public --add-service=http
 sudo firewall-cmd --permanent --zone=public --add-service=https
 # 目前服务器只用在翻墙，所以只开443的tcp协议和udp协议
