@@ -24,7 +24,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog/server:/app
+      - ~/github/yiniau-s-blog:/app
       - ~/log/access.log:/log/access.log
     networks:
       - defalut

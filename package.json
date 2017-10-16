@@ -74,7 +74,7 @@
     "client-test-serve": "cd /app && npm i -g serve && serve -s test-build",
     "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@45.77.16.113:~/github/yiniau-s-blog/test-build.tar.bz2 && ssh yiniau@45.77.16.113 tar -jx -f ./github/yiniau-s-blog/test-build.tar.bz2 -C ./github/yiniau-s-blog && ssh yiniau@45.77.16.113 docker restart node-client-test",
     "docker-compose-client-server": "NODE_ENV=production node /app/client/client-server.js",
-    "docker-compose-deploy": "NODE_ENV=production node /app/server.js"
+    "docker-compose-deploy": "NODE_ENV=production node /app/server/server.js"
   },
   "jest": {
     "collectCoverageFrom": [
