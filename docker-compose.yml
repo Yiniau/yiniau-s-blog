@@ -20,11 +20,11 @@ services:
     command: mongod --smallfiles --logpath /var/log/log.log --logappend --dbpath /data/db
   node-server:
     build: ./docker/node
-    container_name: "node"
+    container_name: "node-server"
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog:/app
+      - ~/github/yiniau-s-blog/server:/app
       - ~/log/access.log:/log/access.log
     networks:
       - defalut
