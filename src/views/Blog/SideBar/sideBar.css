@@ -1,0 +1,53 @@
+.blog_sidebar {
+  width: 15vw;
+  min-height: 100vh;
+  background-color: rgba(255,255,255,0);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  transition: all 0.2 ease-in-out;
+}
+
+
+/*
+  移动端支持
+ */
+
+#sideBarSwitch {
+  display: none;
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  #sideBarSwitch {
+    opacity: 1;
+    display: block;
+    /*position: fixed;
+    top: 10px;
+    left: 10px;*/
+    z-index: 300;
+  }
+  .blog_sidebar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 200;
+
+    width: 0;
+    height: 0;
+
+    background-color: rgb(255,255,255);
+    transition: all 0.2s ease-in-out;
+  }
+  /*.blog_sidebar,*/
+  .blog_sidebar * {
+    /*display: none;*/
+  }
+
+  .blog_sidebar_logo {
+    display: none;
+  }
+}

@@ -1,16 +1,16 @@
 import React from 'react';
 
+import './mainContent.css'
+
 const MainContent = (props) => {
   const style = {
-    width: '85vw',
-    minHeight: '100vh',
-
-    boxSize: 'border-box',
 
     ...props.style,
   }
   return (
-    <div style={style}>
+    <div
+      className='blog_mainContent'
+      style={style}>
       {props.children}
     </div>
   )

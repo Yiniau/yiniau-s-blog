@@ -46,7 +46,6 @@
   word-break: break-all;
 }
 
-
 .article code,.article pre {
   color: #ed6712;
   font-size: 0.8em;
@@ -89,4 +88,24 @@
   top: -0.09em;
   font-size: 1.2em;
   font-weight: 700;
+}
+
+/*
+  移动端支持
+ */
+.article > .ib {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .article {
+    width: 100vw;
+    height: auto;
+    padding: 10px 5vw;
+    border-radius: 0;
+
+    line-height: 1.2;
+
+    align-items: center;
+    z-index: 50;
+  }
 }

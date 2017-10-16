@@ -20,9 +20,9 @@ import './Blog.css';
 import fireworks from './fireworks';
 
 //////=============static variable================
-// /****/const navListUrl = 'http://localhost:9999/api/getNavList';
+/****/const navListUrl = 'http://localhost:9999/api/getNavList';
 // /****/const navListUrl = 'http://localhost:8090/api/getNavList';
-/****/const navListUrl = 'https://yiniau.com/api/getNavList';
+// /****/const navListUrl = 'https://yiniau.com/api/getNavList';
 //////============================================
 
 class Blog extends Component {
@@ -155,25 +155,29 @@ class Blog extends Component {
     } = this.props;
 
     // 卡片导航区配置(static)
-    const tagNbConfigList = [
-      {
-        ...navBaseConfig,
-        content: 'tags',
-        to: '/blog/tags',
-        icon: 'fa fa-tags fa-lg',
-        style: {
-          width: '100%',
-          height: '7vh',
-          backgroundColor: 'inherit'
-        }
-      },
-    ];
+    let tagNbConfigList = void 0;
+    if (! /Mobile/i.test(navigator.userAgent)) {
+      tagNbConfigList = [
+        {
+          ...navBaseConfig,
+          content: 'tags',
+          to: '/blog/tags',
+          icon: 'fa fa-tags fa-lg',
+          style: {
+            width: '100%',
+            height: '7vh',
+            backgroundColor: 'inherit'
+          }
+        },
+      ];
+    }
+
 
     return (
       <div className="Blog">
         <canvas className="fireworks">canvas 不可用，请使用最新的现代浏览器</canvas>
         <SideBar className="deep-1">
-          <Logo imgSrc={require('./avatar@0,5x.jpg')}/>
+          <Logo imgSrc={require('./avatar@0,5x.jpg')} className='blog_sidebar_logo'/>
 
           <ALC>
             {/**********************************/}
@@ -231,7 +235,7 @@ class Blog extends Component {
           <TabContent>
             {/**********************************/}
             {/* tags navbuttons list           */}
-            {tagNbConfigList.map((conf) => (
+            {tagNbConfigList && tagNbConfigList.map((conf) => (
               <NavButton
                 key={`nb-${conf.content}`}
                 to={conf.to}
@@ -245,6 +249,7 @@ class Blog extends Component {
 
         </SideBar>
         <MainContent>
+          <Logo imgSrc={require('./avatar@0,5x.jpg')} className='blog_mainContent_logo'/>
           <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>

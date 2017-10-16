@@ -58,8 +58,7 @@ class ImageButton extends Component {
         style={this.props.style}
         className={`ib ${isOnfocus ? 'deep-3' : 'deep-2'}`}
         onMouseEnter={this.fouceChange}
-        onMouseLeave={this.fouceChange}
-      >
+        onMouseLeave={this.fouceChange}>
         <img src={this.props.imgSrc} onLoad={this.centerImage} alt=""/>
       </div>
     )

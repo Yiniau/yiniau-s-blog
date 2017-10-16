@@ -13,6 +13,7 @@ class NavButton extends Component {
     iconStyle: PropTypes.object.isRequired,
     icon: PropTypes.string,
     boxStyle: PropTypes.object,
+    boxClassName: PropTypes.string,
     textStyle: PropTypes.object,
     shadowStyle: PropTypes.string,
     isActive: PropTypes.bool,

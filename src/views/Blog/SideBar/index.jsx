@@ -1,25 +1,38 @@
 import React from 'react';
 
+import './sideBar.css';
+
 // 侧边栏
 const SideBar = (props) => {
-  const style = {
-    width: '15vw',
-    minHeight: '100vh',
-    backgroundColor: 'rgba(255, 255, 255, 0)',
 
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'relative',
+  const {
+    className,
+    style,
+    children,
+  } = props;
 
-    ...props.style,
+  let cn = className || '';
+  if (/Mobile/i.test(navigator.userAgent)) {
+    cn === '' ? cn += ' hidden' : cn = 'hidden';
   }
 
   return (
-    <div style={style} className={props.className}>
-      {props.children}
+    <div style={style} className={`blog_sidebar ${cn}`}>
+      <button
+        id="sideBarSwitch"
+        className={`fa fa-list-ul fa-2 iconButton`}
+        aria-hidden={true}
+        onClick={toogleSideBar}></button>
+      {children}
     </div>
   )
+}
+
+function toogleSideBar(e) {
+  const sideBar = document.querySelector('.blog_sidebar');
+  sideBar.className === 'blog_sidebar'
+    ? sideBar.className = 'blog_sidebar show'
+    : sideBar.className = 'blog_sidebar';
 }
 
 export default SideBar;

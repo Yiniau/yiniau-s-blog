@@ -63,6 +63,19 @@ services:
     ports:
       - "5001:8090"
     command: npm run weixin-server
+  node-client-test:
+    build: ./docker/node
+    container_name: "node-client-test"
+    environment:
+      - NODE_ENV:production
+    volumes:
+      - ~/github/yiniau-s-blog/test-build:/app
+    networks:
+      - defalut
+      - app_net
+    ports:
+      - "5002:5000"
+    command: npm run client-test-server
 networks:
   defalut:
   app_net:

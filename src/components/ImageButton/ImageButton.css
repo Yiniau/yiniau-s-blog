@@ -11,3 +11,8 @@
   position: relative;
   z-index: 1;
 }
+ @media (max-width: 1100px) {
+   .ib {
+     margin: 0, auto;
+   }
+ }

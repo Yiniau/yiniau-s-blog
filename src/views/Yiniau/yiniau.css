@@ -4,7 +4,6 @@
   background: rgb(58, 171, 219);
 
   border: 20px solid;
-  /*border-radius: 1rem;*/
   border-image: radial-gradient(rgb(58, 171, 219), rgba(255, 255, 255, 0.5));
 
   box-sizing: border-box;

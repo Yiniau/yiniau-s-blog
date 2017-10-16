@@ -11,12 +11,10 @@
   align-items: center;
   justify-content: space-between;
 
-  -webkit-transition: all 0.45s ease-in-out;
-  -moz-transition: all 0.45s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
 .nb > h6 {
-  font-size: 14px;
+  font-size: 1rem;
   color: #000000;
   margin: 0 2vw;
   max-width: 85%;

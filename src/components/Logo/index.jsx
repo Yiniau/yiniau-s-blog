@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ImageButton from '../ImageButton'
+import ImageButton from '../ImageButton';
+
+import './logo.css';
 
 class Logo extends Component {
 
@@ -18,24 +20,19 @@ class Logo extends Component {
   }
 
   render () {
-    const boxStyle = {
-      width: '15vw',
-      margin: '5vh 0 3vh',
-
-      backgroundColo: 'rgba(255, 255, 255, 0)',
-
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
-    }
-
+    const {
+      className,
+      boxStyle,
+      imgSrc,
+    } = this.props;
 
     return (
-      <div style={{
-        ...boxStyle,
-        ...this.props.boxStyle,
+      <div
+        className={`blog_logo ${className || ''}`}
+        style={{
+          ...boxStyle,
         }}>
-        <ImageButton imgSrc={this.props.imgSrc}/>
+        <ImageButton imgSrc={imgSrc}/>
         <h3
           style={{
             fontFamily: 'Indie Flower, cursive',
