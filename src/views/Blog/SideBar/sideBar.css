@@ -25,10 +25,11 @@
   #sideBarSwitch {
     opacity: 1;
     display: block;
-    /*position: fixed;
-    top: 10px;
-    left: 10px;*/
     z-index: 300;
+    position: relative;
+    top: 15px;
+    transform: scale(2);
+    margin-bottom: 7vh;
   }
   .blog_sidebar {
     position: fixed;
