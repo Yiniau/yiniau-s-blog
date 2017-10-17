@@ -69,7 +69,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog/test-build:/app
+      - ~/github/yiniau-s-blog:/app
     networks:
       - defalut
       - app_net
