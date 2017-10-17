@@ -71,8 +71,8 @@
     "build-storybook": "build-storybook",
     "dev-server": "NODE_ENV=development PORT=9999 node ./server/server.js",
     "client-serve": "cd /app && npm i -g serve && serve -s build",
-    "client-test-serve": "cd /app && npm i -g serve && serve -s test-build",
-    "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@45.77.16.113:~/github/yiniau-s-blog/test-build.tar.bz2 && ssh yiniau@45.77.16.113 tar -jx -f ./github/yiniau-s-blog/test-build.tar.bz2 -C ./github/yiniau-s-blog && ssh yiniau@45.77.16.113 docker restart node-client-test",
+    "client-test-serve": "cd /app && npm i -g serve && serve -s build",
+    "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@45.77.16.113:~/github/yiniau-s-blog/test-build/test-build.tar.bz2 && ssh yiniau@45.77.16.113 tar -jx -f ./github/yiniau-s-blog/test-build/test-build.tar.bz2 -C ./github/yiniau-s-blog/test-build && ssh yiniau@45.77.16.113 docker restart node-client-test",
     "docker-compose-client-server": "NODE_ENV=production node /app/client/client-server.js",
     "docker-compose-deploy": "NODE_ENV=production node /app/server/server.js"
   },
