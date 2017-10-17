@@ -75,7 +75,7 @@ services:
       - app_net
     ports:
       - "5002:5000"
-    command: npm run client-test-server
+    command: npm run client-test-serve
 networks:
   defalut:
   app_net:
