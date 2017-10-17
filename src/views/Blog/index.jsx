@@ -177,7 +177,7 @@ class Blog extends Component {
       <div className="Blog">
         <canvas className="fireworks">canvas 不可用，请使用最新的现代浏览器</canvas>
         <SideBar className="deep-1">
-          <Logo imgSrc={require('./avatar@0,5x.jpg')} className='blog_sidebar_logo'/>
+          <Logo imgSrc={require('./avatar@90x90.jpg')} className='blog_sidebar_logo'/>
 
           <ALC>
             {/**********************************/}
@@ -249,7 +249,7 @@ class Blog extends Component {
 
         </SideBar>
         <MainContent>
-          <Logo imgSrc={require('./avatar@0,5x.jpg')} className='blog_mainContent_logo'/>
+          <Logo imgSrc={require('./avatar@90x90.jpg')} className='blog_mainContent_logo'/>
           <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>

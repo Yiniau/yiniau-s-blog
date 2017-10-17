@@ -8,6 +8,7 @@ import './logo.css';
 class Logo extends Component {
 
   static propTypes = {
+    className: PropTypes.string,
     boxStyle: PropTypes.object,
     imgSrc: PropTypes.string.isRequired,
   }
