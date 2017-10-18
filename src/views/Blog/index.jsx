@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import {
   Logo,
@@ -14,6 +14,8 @@ import MainContent from './MainContent';
 import TabContent from './TabContent';
 // the article self
 import Article from './Article';
+// svg anime
+import BirdAnime from './BirdAnime';
 
 import './Blog.css';
 
@@ -250,7 +252,10 @@ class Blog extends Component {
         </SideBar>
         <MainContent>
           <Logo imgSrc={require('./avatar@90x90.jpg')} className='blog_mainContent_logo'/>
-          <Route path='/blog/:folder/:title' component={Article}/>
+          <Switch>
+            <Route path='/blog' component={BirdAnime}/>
+            <Route path='/blog/:folder/:title' component={Article}/>
+          </Switch>
         </MainContent>
       </div>
     )

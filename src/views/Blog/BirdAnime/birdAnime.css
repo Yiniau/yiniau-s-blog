@@ -1,0 +1,60 @@
+#birds {
+  display: block;
+  width: 400px;
+  height: 600px;
+
+  /* 上下居中 */
+  margin: auto 0;
+}
+
+/* 块状样式 */
+/* bird_1 */
+.bird_1 > .cls-1 {
+  fill: #6d9fbf;
+}
+.bird_1 > .cls-2 {
+  fill: #91d4ff;
+}
+.bird_1 > .cls-3 {
+  fill: #a7ddff;
+}
+.bird_1 > .cls-4 {
+  fill: #addfff;
+}
+.bird_1 > .cls-5 {
+  fill: #496a80;
+}
+.bird_1 > .cls-6 {
+  fill: #243540;
+}
+.bird_1 > .cls-7 {
+  fill: #d3eeff;
+}
+.bird_1 > .cls-8 {
+  fill: #bde5ff;
+}
+/* bird_2 */
+.bird_2 > .cls-1 {
+  fill: #b254a1;
+}
+.bird_2 > .cls-2 {
+  fill: #863f78;
+}
+.bird_2 > .cls-3 {
+  fill: #592a50;
+}
+.bird_2 > .cls-4 {
+  fill: #e0bad9;
+}
+.bird_2 > .cls-5 {
+  fill: #c276b3;
+}
+.bird_2 > .cls-6 {
+  fill: #2d1528;
+}
+.bird_2 > .cls-7 {
+  fill: #d198c6;
+}
+.bird_2 > .cls-8 {
+  fill: #f0ddec;
+}
