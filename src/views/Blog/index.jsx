@@ -252,7 +252,7 @@ class Blog extends Component {
         </SideBar>
         <MainContent>
           <Logo imgSrc={require('./avatar@90x90.jpg')} className='blog_mainContent_logo'/>
-          <Route exact path='/blog' component={BirdAnime}/>
+          <Route exact strict path='/blog' component={BirdAnime}/>
           <Route path='/blog/:folder/:title' component={Article}/>
         </MainContent>
       </div>
