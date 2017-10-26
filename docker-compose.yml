@@ -72,7 +72,7 @@ services:
       - ~/github/yiniau-s-blog:/app
     networks:
       - defalut
-      - app_nets
+      - app_net
     ports:
       - "5002:5000"
     command: npm run client-test-serve
