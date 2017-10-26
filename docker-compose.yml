@@ -8,8 +8,8 @@ services:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/var/log
     volumes:
-      - ~/db/mongo-data:/data/db
-      - ~/db/mongo-log:/var/log
+      - /home/yiniau/db/mongo-data:/data/db
+      - /home/yiniau/db/mongo-log:/var/log
     networks:
       - defalut
       - app_net
@@ -24,8 +24,8 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog:/app
-      - ~/logs/yiniau-s-blog/access.log:/log/access.log
+      - /home/yiniau/github/yiniau-s-blog:/app
+      - /home/yiniau/logs/yiniau-s-blog/access.log:/log/access.log
     networks:
       - defalut
       - app_net
@@ -42,7 +42,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog:/app
+      - /home/yiniau/github/yiniau-s-blog:/app
     networks:
       - defalut
       - app_net
@@ -55,8 +55,8 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/weixin-server:/app
-      - ~/logs/yiniau-s-blog/koa-weixin-access.log:/log/koa-weixin-access.log
+      - /home/yiniau/github/weixin-server:/app
+      - /home/yiniau/logs/yiniau-s-blog/koa-weixin-access.log:/log/koa-weixin-access.log
     networks:
       - defalut
       - app_net
@@ -69,7 +69,7 @@ services:
     environment:
       - NODE_ENV:production
     volumes:
-      - ~/github/yiniau-s-blog:/app
+      - /home/yiniau/github/yiniau-s-blog:/app
     networks:
       - defalut
       - app_net
