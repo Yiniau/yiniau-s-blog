@@ -25,12 +25,12 @@ services:
       - NODE_ENV:production
     volumes:
       - ~/github/yiniau-s-blog:/app
-      - ~/log/access.log:/log/access.log
+      - ~/logs/yiniau-s-blog/access.log:/log/access.log
     networks:
       - defalut
       - app_net
     links:
-      - mongodb:db
+      - mongodb:dba
     depends_on:
       - mongodb
     ports:
@@ -56,7 +56,7 @@ services:
       - NODE_ENV:production
     volumes:
       - ~/github/weixin-server:/app
-      - ~/log/koa-weixin-access.log:/log/koa-weixin-access.log
+      - ~/logs/yiniau-s-blog/koa-weixin-access.log:/log/koa-weixin-access.log
     networks:
       - defalut
       - app_net
@@ -72,7 +72,7 @@ services:
       - ~/github/yiniau-s-blog:/app
     networks:
       - defalut
-      - app_net
+      - app_nets
     ports:
       - "5002:5000"
     command: npm run client-test-serve
