@@ -63,7 +63,7 @@
   },
   "scripts": {
     "store": "node scripts/store.js",
-    "push": "node scripts/push.js yiniau 47.95.211.78",
+    "push": "node scripts/push.js yiniau 45.76.153.213",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
@@ -72,7 +72,7 @@
     "dev-server": "NODE_ENV=development PORT=9999 node ./server/server.js",
     "client-serve": "cd /app && npm i -g serve && serve -s build",
     "client-test-serve": "cd /app && npm i -g serve && serve -s test-build/build",
-    "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@47.95.211.78:~/github/yiniau-s-blog/test-build/test-build.tar.bz2 && ssh yiniau@47.95.211.78 tar -jx -f ./github/yiniau-s-blog/test-build/test-build.tar.bz2 -C ./github/yiniau-s-blog/test-build && ssh yiniau@47.95.211.78 docker restart node-client-test",
+    "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@45.76.153.213:~/github/yiniau-s-blog/test-build/test-build.tar.bz2 && ssh yiniau@45.76.153.213 tar -jx -f ./github/yiniau-s-blog/test-build/test-build.tar.bz2 -C ./github/yiniau-s-blog/test-build && ssh yiniau@45.76.153.213 docker restart node-client-test",
     "docker-compose-client-server": "NODE_ENV=production node /app/client/client-server.js",
     "docker-compose-deploy": "NODE_ENV=production node /app/server/server.js"
   },

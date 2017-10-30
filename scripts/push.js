@@ -75,7 +75,7 @@ function setFileMap(dir) {
 }
 
 /**
- * save the FILE_HASH_MAP to local file
+ * save FILE_HASH_MAP to local file
  *   储存结构为数组[[map.key, map.value]]
  * @param dir
  */
