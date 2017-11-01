@@ -30,7 +30,7 @@ services:
       - defalut
       - app_net
     links:
-      - mongodb:dba
+      - mongodb:db
     depends_on:
       - mongodb
     ports:
