@@ -133,7 +133,7 @@ function getFullDir(fs, dir) {
     throw new TypeError('dir should be a array or having a map method');
   }
   dpaths.forEach((f => {
-    f.files.map(fn => {
+    f.files.forEach(fn => {
       paths.push([`${dir}/${f.folder}/${fn}`, f.folder, fn.slice(0, -3)])
     })
   }));
@@ -147,4 +147,3 @@ module.exports = {
   resolveMarkdown,
   saveAsHTML,
 };
-

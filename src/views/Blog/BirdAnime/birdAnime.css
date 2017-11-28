@@ -1,7 +1,7 @@
 #birds {
   display: block;
-  width: 400px;
-  height: 600px;
+
+  width: 40vw;
 
   /* 上下居中 */
   margin: auto 0;
