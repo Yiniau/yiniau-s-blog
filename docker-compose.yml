@@ -17,7 +17,7 @@ services:
       - "27017:27017"
     expose:
       - "27017"
-    command: chown -R mongodb /var/log/log.log && mongod --smallfiles --logpath /var/log/log.log --logappend --dbpath /data/db
+    command: chown -R mongodb /var/log && mongod --smallfiles --logpath /var/log/log.log --logappend --dbpath /data/db
   node-server:
     build: ./docker/node
     container_name: "node-server"
