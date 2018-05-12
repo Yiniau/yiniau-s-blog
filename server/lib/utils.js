@@ -32,10 +32,10 @@ function methodMapping(router, mapping) {
  */
 function getPaths(fs, dir) {
   let paths = [];
-  const fileReg = /.*$/ig
+  const fileReg = /\.(.*)$/i
     fs.readdirSync(dir)
     .filter(fn => !fn.startsWith('.')) // 去掉不需要的文件
-    .filter(fn => fileReg.test(fn)) // 去掉不需要的文件
+    .filter(fn => !fileReg.test(fn)) // 去掉不需要的文件
     .forEach(function insertIntoMap(dn) {
       const cfns = fs.readdirSync(`${dir}/${dn}`)
         .filter(fn => !fn.startsWith('.'))
