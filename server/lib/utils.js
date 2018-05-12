@@ -35,7 +35,7 @@ function getPaths(fs, dir) {
     fs.readdirSync(dir)
     .filter(fn => !fn.startsWith('.')) // 去掉不需要的文件
     .filter(fn => !fn.endsWith('.js')) // 去掉不需要的文件
-    .filter(fn => fn.endsWith('.md'))
+    .filter(fn => !fn.endsWith('.md'))
     .forEach(function insertIntoMap(dn) {
       const cfns = fs.readdirSync(`${dir}/${dn}`)
         .filter(fn => !fn.startsWith('.'))
