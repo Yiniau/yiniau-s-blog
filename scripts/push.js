@@ -1,6 +1,5 @@
 /* eslint-disable strict */
 
-
 const fs = require('fs');
 const paths = require('../config/paths');
 const crypto = require('crypto');
@@ -21,6 +20,9 @@ const {
   log,
   error,
 } = console;
+
+const REMOTE_URL = "/home/yiniau/github/yiniau-s-blog/articles";
+const REMOTE_USER = "yiniau";
 
 // 文章hash映射表
 const FILE_HASH_MAP = new Map();
@@ -86,7 +88,7 @@ function makeHashFile(dir) {
     mode,
   } = OPEN_SYNC_CONFIG;
   try {
-// eslint-disable-next-line strict
+    // eslint-disable-next-line strict
     fs.open(path, flags, mode, (err, fd) => {
       if (err) {
         throw new Error('file open error');
@@ -98,6 +100,7 @@ function makeHashFile(dir) {
         FILE_HASH_MAP.forEach((v, k) => {
           // 当对象属性key中含有中文时似乎会引发编码混乱
           // 因此储存为文件的时候选择了将md5作为key
+          log(`now writing \`${blue(v)}\``);
           wstream.write(`  ['${k}', '${v}'],\n`);
         });
         wstream.end(']');
@@ -107,7 +110,7 @@ function makeHashFile(dir) {
     error(e)
   }
 
-  //TODO: 添加服务器上的文件监听，一旦articles文章更新则自动更新数据库数据
+  // TODO: 添加服务器上的文件监听，一旦articles文章更新则自动更新数据库数据
 }
 
 /**
@@ -116,6 +119,12 @@ function makeHashFile(dir) {
  * @returns {Map}
  */
 function restoreStructure(arr) {
+  if (!arr) {
+    throw new Error('hash文件不存在');
+  };
+  if (!Array.isArray(arr)) {
+    throw new Error('hash.js文件內需要为数组');
+  }
   return new Map(arr);
 }
 
@@ -153,7 +162,7 @@ function getChangedFilesList(user, ip) {
  * @param user 登陆服务器的身份
  * @param ip  服务器的ip
  */
-function pushToRemote (user, ip, fileList) {
+function pushToRemote(user, ip, fileList) {
   exec('clear');
   log(`now push.js run in ${blue(underline(process.cwd().toString()))}`);
   const path = paths.mdArticles + '/hash.js';
@@ -171,12 +180,17 @@ function pushToRemote (user, ip, fileList) {
       log('  ' + yellow(fn) + '  ...');
       const folderTitle = fn.split('/');
       exec(`ssh ${user}@${ip} mkdir /home/yiniau/github/yiniau-s-blog/articles/${folderTitle[0]}`);
-      exec(`scp -r ${paths.mdArticles}/${fn} ${user}@${ip}:~/github/yiniau-s-blog/articles/${fn}`);
+      exec(`scp -r ${paths.mdArticles}/${fn} ${user}@${ip}:${REMOTE_URL}/${fn}`);
     }
   } catch (e) {
     error(e)
   }
 }
+log(paths.mdArticles)
+// 更新本地hash文件
+setFileMap(paths.mdArticles);
+log(FILE_HASH_MAP)
+makeHashFile(paths.mdArticles);
 
 const fileList = getChangedFilesList(USER, IP);
 log(fileList);

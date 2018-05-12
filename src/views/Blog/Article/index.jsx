@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-// TODO: [javascript, ] highlight
 import './article.css';
 import './mdStyle.css';
 import './css.css';

@@ -33,3 +33,4 @@ yarn-debug.log*
 yarn-error.log*
 /test-build.tar.bz2
 *.zip
+*.bz2

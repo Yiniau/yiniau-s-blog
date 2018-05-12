@@ -34,7 +34,7 @@ const es7FsOpen = url => {
  * 获取对应collection，返回collection和db连接
  * @param name collection 的名字
  * @param MC MongoClient
- * @returns {Promise.<{db: *, col}>}
+ * @returns {Promise}
  */
 async function getCollection(name, MC) {
   try {
@@ -65,7 +65,7 @@ async function getCollection(name, MC) {
  *
  * @param fullDir 存放文章位置的完整地址
  * @param MC MongoClient
- * @returns {Promise.<void>}
+ * @returns {Promise}
  */
 async function saveArticles(fullDir, MC) {
   try {
@@ -92,15 +92,11 @@ async function saveArticles(fullDir, MC) {
   }
 }
 
-async function saveData(data, col) {
-
-}
-
 /**
  * 通过 title 获取 article
  * @param title {String} article's title
  * @param MC {MongoClient} MongoClient
- * @returns {Promise.<*>} 完整的 article 的对象描述符
+ * @returns {Promise} 完整的 article 的对象描述符
  */
 async function getArticleByTitle(title, MC) {
   try {
@@ -117,7 +113,7 @@ async function getArticleByTitle(title, MC) {
  * 通过 tags 获取 article 的 title
  * @param tags {[String]} article's tags
  * @param MC {MongoClient} MongoClient
- * @returns {Promise.<*>} 包含了 mongodb 中储存文章的 _id 和 title 的对象数组
+ * @returns {Promise} 包含了 mongodb 中储存文章的 _id 和 title 的对象数组
  */
 async function getTitlesByTags(tags, MC) {
   try {
@@ -133,7 +129,7 @@ async function getTitlesByTags(tags, MC) {
 /**
  * 获取全部的categotie
  * @param MC {MongoClient} MongoClient
- * @returns {Promise.<*>} [categories]
+ * @returns {Promise} [categories]
  */
 async function getAllCategories(MC) {
   try {
@@ -167,7 +163,6 @@ async function getTitlesByCategory(cate, MC) {
 module.exports = {
   MongoClient,
   saveArticles,
-  saveData,
   getArticleByTitle,
   getTitlesByTags,
   getAllCategories,

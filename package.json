@@ -73,6 +73,7 @@
     "client-serve": "cd /app && npm i -g serve && serve -s build",
     "client-test-serve": "cd /app && npm i -g serve && serve -s test-build/build",
     "deploy-test-client": "node scripts/build.js && tar -jcv -f test-build.tar.bz2 ./build && scp ./test-build.tar.bz2 yiniau@45.76.153.213:~/github/yiniau-s-blog/test-build/test-build.tar.bz2 && ssh yiniau@45.76.153.213 tar -jx -f ./github/yiniau-s-blog/test-build/test-build.tar.bz2 -C ./github/yiniau-s-blog/test-build && ssh yiniau@45.76.153.213 docker restart node-client-test",
+    "deploy-server": "tar -jcv -f server.tar.bz2 ./server && scp ./server.tar.bz2 yiniau@45.76.153.213:~/github/yiniau-s-blog/server/server.tar.bz2 && ssh yiniau@45.76.153.213 tar -jx -f ./github/yiniau-s-blog/server/server.tar.bz2 -C ./github/yiniau-s-blog/server && ssh yiniau@45.76.153.213 docker restart node-server",
     "docker-compose-client-server": "NODE_ENV=production node /app/client/client-server.js",
     "docker-compose-deploy": "NODE_ENV=production node /app/server/server.js"
   },
